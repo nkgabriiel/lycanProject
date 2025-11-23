@@ -3,7 +3,7 @@
     --black: black;
     --bg: white;
     --border: 0.4rem solid #1f3266;
-    --header-height: 110px; /**/
+    --header-height: 110px;
     font-size: 10px;
 }
 
@@ -19,8 +19,8 @@
 
 body {
     background-color: var(--bg);
-    margin-top: var(--header-height);/**/
-    overflow-x: hidden; /**/
+    margin-top: var(--header-height);
+    overflow-x: hidden; 
 }
 
 section {
@@ -49,7 +49,7 @@ section {
 
 .header:hover section {
   padding: 0.9rem 1.25rem;
-  background-color: white;
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .header:hover .logo img {
@@ -57,8 +57,6 @@ section {
 }
 
 .header { z-index: 99; }
-
-.header .navbar:hover ~ .dummy { }
 
 .header section {
   display: flex;
@@ -68,6 +66,10 @@ section {
   padding: 0.45rem 1.25rem;
   box-sizing: border-box;
   transition: padding 180ms ease;
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
 }
 
 .logo img {
@@ -80,22 +82,15 @@ section {
 
 .logo img:hover{
     height: 110px;
-    filter: 
-    invert(55%) 
-    sepia(64%) 
-    saturate(748%) 
-    hue-rotate(199deg) 
-    brightness(94%) 
-    contrast(88%);
 }
 
 .navbar {
     display: flex;
     justify-content: flex-start;
-    gap: 8rem;/**/
+    gap: 8rem;
     background: transparent;
     font-weight: bold;
-    flex: 0 0 auto;/**/
+    flex: 0 0 auto;
     align-items: center;
 }
 
@@ -108,7 +103,6 @@ section {
 
 .navbar a:hover {
     transform: translateY(-3px) scale(1.06);
-    color: #3963d4;
 }
 
 .icons {
@@ -227,5 +221,5 @@ section {
 
 .home-container .btn-homepage:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 }
