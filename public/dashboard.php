@@ -32,6 +32,7 @@ if($_SESSION['perfil'] === 'admin') {
     <div class="tela-inicialadmin">
     <h1>Bem-vindo, <?= $usuario_exib ?></h1>
     <a href="../app/logout.php", class="btn-cancelar">Sair</a> <hr>
+    <a href="<?= BASE_URL ?>/public/logs.php" style="margin-right: 15px;">Ver Logs de Auditoria</a>
 
     <h2>Gerenciamento de usuários</h2>
 

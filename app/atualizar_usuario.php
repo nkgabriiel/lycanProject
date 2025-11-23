@@ -29,6 +29,7 @@ try {
    $stmt = $pdo->prepare($sql);
 
     if($stmt->execute([$nome, $email, $perfil, $id])) {
+        registrarLog('Atualizar_Usuario', 'Atualizou o usuário ID: ' . $id);
    $_SESSION['flash_sucesso'] = "Usuário atualizado com sucesso!";
     } else {
         $_SESSION['flash_erro'] = 'Ocorreu uma falha ao executar a atualização.';

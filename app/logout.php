@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . '/config.php';
 
+if(isset($_SESSION['usuario_id'])) {
+    registrarLog('Logout', 'Usuário saiu do sistema');
+}
+
 $_SESSION = [];
 session_unset();
 session_destroy();

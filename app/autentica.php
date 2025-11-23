@@ -51,6 +51,8 @@ $_SESSION['usuario_id'] = $user['id'];
 $_SESSION['perfil'] = $user['perfil'];
 $_SESSION['falhas_login'] = 0;
 
+registrarLog('Login', 'Usuário logou no sistema');
+
 $_SESSION['flash_sucesso'] = 'Login realizado com sucesso.';
 
 if($user['perfil'] === 'admin') {

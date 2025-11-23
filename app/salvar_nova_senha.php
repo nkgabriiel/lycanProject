@@ -53,6 +53,7 @@ try {
     $stmt_delete_token->execute([$reset_request['id']]);
 
     $pdo ->commit();
+    registrarLog('Reset senha', "Utilizador ID: " . $usuario_id . 'redefiniu a senha');
 
     $_SESSION['flash_sucesso'] = 'Sua senha foi alterada com sucesso! Faça login';
     redirecionar('/public/index.php');
