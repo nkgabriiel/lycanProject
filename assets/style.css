@@ -1,3 +1,4 @@
+/* ================= ROOT VARIABLES ================= */
 :root {
     --main-color: #1f3266;
     --black: black;
@@ -7,6 +8,7 @@
     font-size: 10px;
 }
 
+/* ================= GLOBAL RESET ================= */
 * {
     margin: 0;
     padding: 0;
@@ -17,12 +19,14 @@
     transition: 0.2s linear;
 }
 
+/* ================= BODY ================= */
 body {
     background-color: var(--bg);
     margin-top: var(--header-height);
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
+/* ================= GENERIC SECTION ================= */
 section {
     padding: 0.5rem 2rem;
     margin: 0 auto;
@@ -31,6 +35,7 @@ section {
     background-color: transparent;
 }
 
+/* ================= HEADER (TOP BAR) ================= */
 .header {
   position: fixed;
   top: 0;
@@ -42,14 +47,15 @@ section {
   transition: padding 180ms ease, box-shadow 180ms ease;
 }
 
+/* --- HEADER HOVER EFFECT --- */
 .header:hover {
   box-shadow: 0 10px 30px rgba(0,0,0,0.10);
-  border-bottom: 0.35rem solid #1f3266;
+  border-bottom: 0.35rem solid var(--main-color);
 }
 
 .header:hover section {
   padding: 0.9rem 1.25rem;
-  background: rgba(255, 255, 255, 0.25);
+  background: white;
 }
 
 .header:hover .logo img {
@@ -58,40 +64,54 @@ section {
 
 .header { z-index: 99; }
 
+/* ================= HEADER SECTION (INTERNAL LAYOUT) ================= */
 .header section {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 1rem;
   padding: 0.45rem 1.25rem;
   box-sizing: border-box;
   transition: padding 180ms ease;
-  background: rgba(255, 255, 255, 0.15);
+
+  /* efeito vidro */
+  background: rgba(255, 255, 255, 0.10);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.10);
 }
 
+/* ================= LOGO ================= */
+.logo {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
 .logo img {
-  height: 100px;
+  max-height: 100px;
+  height: auto;
+  width: auto;
   object-fit: contain;
   transition: transform 180ms ease;
   display: block;
-  margin-right: 55rem;
+  margin-right: 0;
 }
 
-.logo img:hover{
+.logo img:hover {
     height: 110px;
 }
 
+/* ================= NAVBAR (MENU) ================= */
 .navbar {
     display: flex;
-    justify-content: flex-start;
-    gap: 8rem;
+    justify-content: center;
+    gap: 3rem;
     background: transparent;
     font-weight: bold;
-    flex: 0 0 auto;
+    flex: 1 1 auto;
     align-items: center;
+    min-width: 0;
 }
 
 .navbar a {
@@ -99,26 +119,34 @@ section {
   font-size: 1.8rem;
   padding: 0.25rem 0.8rem;
   transition: transform 160ms ease, color 160ms ease;
+  white-space: nowrap;
 }
 
 .navbar a:hover {
     transform: translateY(-3px) scale(1.06);
+    filter: 
+    invert(55%) 
+    sepia(64%) 
+    saturate(748%) 
+    hue-rotate(199deg) 
+    brightness(94%) 
+    contrast(88%);
 }
 
+/* ================= ICONS (SEARCH, CART, USER) ================= */
 .icons {
     display: flex;
     align-items: center;
-    gap: 7rem;
+    gap: 1rem;
+    flex: 0 0 auto;
     margin-left: 0;
     padding-left: 0.25rem;
-    
-    .search{
-        margin-right: 250px;
-    }
+}
 
-    .cart {
-        margin-right: 35px;
-    }
+.icons .search,
+.icons .cart {
+    margin: 0;
+    padding: 0;
 }
 
 .icons img {
@@ -129,18 +157,19 @@ section {
         hue-rotate(199deg)
         brightness(93%)
         contrast(88%);
-        height: 35px;
-        width: auto;
+    height: 35px;
+    width: auto;
+    display: block;
 }
 
 .icons img:hover {
     transform: translateY(-3px) scale(1.06);
-    filter: 
-    invert(55%) 
-    sepia(64%) 
-    saturate(748%) 
-    hue-rotate(199deg) 
-    brightness(94%) 
+    filter:
+    invert(55%)
+    sepia(64%)
+    saturate(748%)
+    hue-rotate(199deg)
+    brightness(94%)
     contrast(88%);
 }
 
@@ -169,6 +198,7 @@ section {
     padding-bottom: 4rem;
 }
 
+/* --- HERO SECTION (TEXT AREA) --- */
 .home-container > section {
     width: 100%;
     height: auto;
@@ -180,6 +210,7 @@ section {
     justify-content: center;
 }
 
+/* --- HERO CONTENT (CENTERED TEXT) --- */
 .home-container .content {
     display: flex;
     flex-direction: column;
@@ -198,6 +229,7 @@ section {
     margin-bottom: 0;
 }
 
+/* --- HERO TITLE --- */
 .home-container .content h3 {
     background: white;
     color: var(--main-color); 
@@ -207,11 +239,12 @@ section {
     display: inline-block;
 }
 
+/* --- HERO BUTTON --- */
 .home-container .btn-homepage {
     padding: 0.65rem 1.25rem;
     font-size: 1.8rem;
     border-radius: 0.35rem;
-    background-color: #1f3266;
+    background-color: var(--main-color);
     color: white;
     font-weight: 700;
     text-decoration: none;
@@ -222,4 +255,111 @@ section {
 .home-container .btn-homepage:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+/*================ HOMEPAGE BOX =================== */
+.homepage-content h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--main-color);
+    padding: 2rem;
+}
+
+.box-content {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    gap: 1rem;
+    padding: 2rem;
+    padding-left: 0.2rem;
+}
+
+.box {
+    background: linear-gradient(#3963d4, var(--main-color));
+    padding: 3rem;
+    border-radius: 1rem;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin: 0 1.5rem;
+    position: relative;
+}
+
+.box img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.6rem;
+}
+
+.box h3 {
+    color: white;
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+.price {
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+.through {
+    text-decoration: line-through;
+}
+
+.btn-homepage{
+    background-color: white;
+    color: var(--main-color);
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-radius: 0.8rem;
+    margin-top: 1.5rem;
+    display: inline-block;
+}
+
+.btn-homepage:hover{
+    transform: translateY(-3px) scale(1.06);
+}
+
+.stars {
+    display: grid;
+    gap: 0.5rem 0.3rem;
+    grid-template-columns: repeat(5, auto);
+    grid-auto-rows: auto;
+    position: static !important;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.title-stars {
+    display: flex;
+    align-items: flex-start;
+    gap: 7rem;
+}
+
+.stars h2 {
+    grid-column: 1 / -1; 
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    margin-right: 30px;
+}
+
+.stars img {
+    width: 22px;
+    height: auto;
+    display: block;
+    grid-row: 2;
+
+    filter:
+    invert(55%)
+    sepia(64%)
+    saturate(748%)
+    hue-rotate(199deg)
+    brightness(94%)
+    contrast(88%);
 }
