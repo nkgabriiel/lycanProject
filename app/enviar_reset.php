@@ -31,5 +31,5 @@ exit;
 }
 
 $_SESSION['flash_sucesso'] = 'Caso exista uma conta correspondente ao email escrito, um link de recuperação de senha será enviado.';
-   redirecionar('../public/index.php');
+   redirecionar('/public/index.php');
 ?>

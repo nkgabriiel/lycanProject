@@ -3,7 +3,7 @@ require_once __DIR__ . '/config.php';
 
 if(empty($_SESSION['usuario_id'])) {
     $_SESSION['flash_erro'] = 'Acesso restrito: faça login para continuar.';
-    redirecionar('../public/index.php');
+    redirecionar('/public/index.php');
     exit;
 }
 
