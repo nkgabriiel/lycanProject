@@ -21,7 +21,7 @@ if($_SESSION['perfil'] === 'admin') {
         $sql_produtos = 'SELECT p.*, c.nome as categoria_nome
                          FROM produtos p
                          LEFT JOIN categorias c ON p.categoria_id = c.id
-                         ORDER BY p.name ASC';
+                         ORDER BY p.nome ASC';
         $stmt_prod = $pdo->query($sql_produtos);
         $lista_produtos = $stmt_prod->fetchAll(PDO::FETCH_ASSOC);
 
@@ -119,8 +119,8 @@ if($_SESSION['perfil'] === 'admin') {
                     <?php foreach($lista_produtos as $produto): ?>
                         <tr>
                             <td>
-                                <?php if(!empty($produto['image_url'])): ?>
-                                    <img src="<?= htmlspecialchars($produto['image_url'])?>" alt="Prod">
+                                <?php if(!empty($produto['imagem_url'])): ?>
+                                    <img src="<?= htmlspecialchars($produto['imagem_url'])?>" alt="Prod">
                                 <?php else: ?>
                                     <span>Sem img</span>
                                 <?php endif; ?>
@@ -132,7 +132,7 @@ if($_SESSION['perfil'] === 'admin') {
                             <td>
                                 <a href="<?= BASE_URL ?>/public/produto_form.php?id=<?=$produto['id']?>">Editar</a>
 
-                                <form action="<?= BASE_URL ?>/app/deletar_produto.php" method="POST" display="inline" onsubmit="return confirm('Tem certeza que deseja excluir esse produto?');">
+                                <form action="<?= BASE_URL ?>/app/deletar_produto.php" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir esse produto?');">
                                     <input type="hidden" name="produto_id" value="<?= $produto['id'] ?>">
                                     <button type="submit">Deletar</button>
                                 </form>
