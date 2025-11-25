@@ -973,3 +973,147 @@ body.create-user .btn-cancelar {
     appearance: none;
     cursor: pointer;
 }
+
+/* ================= MY PROFILE================= */
+body.myprofile-page {
+    background: linear-gradient(white, var(--main-color));
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+body.myprofile-page .tela-meuperfil {
+    position: fixed;
+    top: 25%;
+    left: 38.5%;
+    transform: (-50%, -50%);
+    width: 450px;
+    height: 530px;
+    padding: 0;
+    display: block;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 30px;
+    color: white;
+    z-index: 50;
+    background: linear-gradient(var(--main-color), #3963d4);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+}
+
+body.myprofile-page .tela-meuperfil label {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-left: 7rem;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+body.myprofile-page .tela-meuperfil input[type="email"],
+body.myprofile-page .tela-meuperfil input[type="text"],
+body.myprofile-page .tela-meuperfil input[type="password"] {
+    width: 70%;
+    max-width: 380px;
+    padding: 1.2rem 1rem;
+    border-radius: 12px;
+    margin: 0 auto 1rem auto;
+    display: block;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
+
+body.myprofile-page .tela-meuperfil h2 {
+    padding: 1rem 0 2rem 0;
+    font-weight: 700;
+    font-size: 3.5rem;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 2rem;
+    width: 70%;
+}
+
+body.myprofile-page .tela-meuperfil h3 {
+    padding: 1rem 0 2rem 0;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0rem;
+    width: 70%;
+}
+
+.btn-back-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btns-myprofile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 2rem;
+    width: 100%; 
+}
+
+body.myprofile-page .tela-meuperfil .btn-alterpassword,
+body.myprofile-page .tela-meuperfil .btn-back,
+body.myprofile-page .tela-meuperfil button {
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 45px;
+    padding: 0 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.15rem;
+    line-height: normal;
+
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    background-clip: padding-box;
+
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+body.myprofile-page .tela-meuperfil .btn-alterpassword:hover,
+body.myprofile-page .tela-meuperfil .btn-back:hover,
+body.myprofile-page .tela-meuperfil button:hover {
+    background-color: white;
+}
+
+body.myprofile-page .tela-meuperfil .btn-back:hover {
+    color: red;
+    font-weight: bold;
+}
+
+body.myprofile-page .tela-meuperfil .btn-save:hover {
+    color: green;
+    font-weight: bold;
+}
+
+body.myprofile-page .tela-meuperfil .btn-alterpassword:hover {
+    color: #1f3266;
+    font-weight: bold;
+}

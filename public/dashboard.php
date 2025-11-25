@@ -72,6 +72,7 @@ if($_SESSION['perfil'] === 'admin') {
     </header>
 
     <div class="tela-inicialadmin">
+        
     <h1>Bem-vindo, <?= $usuario_exib ?></h1>
 
     <h2>Gerenciamento de usuários</h2>
