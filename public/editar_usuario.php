@@ -27,7 +27,46 @@ if(!$usuario) {
         <link rel="stylesheet" href="../assets/style.css">
         <title>Editar Usuário</title>
     </head>
-    <body>
+    <body class="edit-page">
+        
+         <!-- ================= HEADER ================= -->
+    <header class="header">
+        <section>
+            <!-- ================= LOGO ================= -->
+            <a href="pagina_inicial.php" class="logo">
+                <img src="../assets/img/iconlycan.png" alt="logo">
+            </a>
+
+            <!-- ================= NAVBAR ================= -->
+            <nav class="navbar">
+                <a href="pagina_inicial.php">HOME</a>
+                <a href="#male">MASCULINO</a>
+                <a href="#female">FEMININO</a>
+                <a href="#about">CONTATO</a>
+            </nav>
+
+            <!-- ================= ICONS / PROFILE ================= -->
+            <div class="icons">
+                <a href="#">
+                    <img width="35" height="35" class="search" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
+                </a>
+
+                <a href="#">
+                    <img width="35" height="35" class="cart" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
+                </a>
+
+                <div class="profile-dropdown-wrapper">
+                    <img width="35" height="35" alt="Perfil" class="profile-icon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png"/>
+
+                    <div class="profile-dropdown" id="profiledropdown" role="menu" aria-labelledby="profiletoggle">
+                        <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
+                        <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
         <div class="tela-editar">
         <h2>Editar Usuário: <?= htmlspecialchars($usuario['nome'])?></h2>
         <form action="../app/atualizar_usuario.php" method="POST">
@@ -40,14 +79,17 @@ if(!$usuario) {
             <label>Email:</label><br>
             <input type="email" name="email" value="<?= htmlspecialchars($usuario['email'])?>" required> <br><br>
 
-            <label>Perfil</label><br>
+            <label class="edit-perfil">Perfil</label><br>
             <select name="perfil">
                 <option value="user" <?= ($usuario['perfil'] == 'user') ? 'selected' : '' ?> >User</option>
                 <option value="admin" <?= ($usuario['perfil'] == 'admin') ? 'selected' : ''  ?> >Admin</option>
             </select> <br><br>
 
-            <button type="submit">Atualizar Usuário</button>
-            <a href="dashboard.php", class="btn-cancelar">Cancelar</a>
+            <div class="edit-btn">
+            <button type="submit" class="btn-update">Atualizar Usuário</button>
+            <a href="dashboard.php" class="btn-cancelar">Cancelar</a>
+            </div>
+
             </div>
         </form>
     </body>

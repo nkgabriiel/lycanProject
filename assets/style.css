@@ -699,31 +699,161 @@ table tbody td:last-child {
     text-decoration: underline;
 }
 
-.profile-dropdown-wrapper {
-    position: relative;
-    display: inline-block;
+/* ================= EDIT PAGE ================= */
+body.edit-page {
+    background: linear-gradient(white, var(--main-color));
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
-.profile-dropdown {
-    display: none;
-    position: absolute;
-    top: 45px;
-    right: 0;
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    min-width: 150px;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
-    z-index: 1000;
-}
-
-.profile-item {
-    padding: 10px 15px;
+/* ================= BOX EDITAR ================= */
+body.edit-page .tela-editar {
+    position: fixed;
+    top: 25%;
+    left: 38.5%;
+    transform: (-50%, -50%);
+    width: 450px;
+    height:570px;
+    padding: 0;
     display: block;
-    text-decoration: none;
-    color: #333;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 30px;
+    color: white;
+    z-index: 50;
+    background: linear-gradient(var(--main-color), #3963d4);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
 }
 
-.profile-item:hover {
-    background-color: #f2f2f2;
+/* ================= TÍTULO ================= */
+body.edit-page .tela-editar h2 {
+    padding: 1rem 0 2rem 0;
+    font-weight: 700;
+    font-size: 3.5rem;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 2rem;
+    width: 70%;
+}
+
+/* ================= LABELS ================= */
+body.edit-page .tela-editar label {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-left: 7rem;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+/* ================= CAMPOS INPUT ================= */
+body.edit-page .tela-editar input[type="email"],
+body.edit-page .tela-editar input[type="text"] {
+    width: 70%;
+    max-width: 380px;
+    padding: 1.2rem 1rem;
+    border-radius: 12px;
+    margin: 0 auto 1rem auto;
+    display: block;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
+
+/* ================= BOTÕES ================= */
+.edit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 4rem;
+    width: 100%;
+}
+
+body.edit-page .btn-update,
+body.edit-page .btn-cancelar {
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 56px;
+    padding: 0 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.15rem;
+    line-height: normal;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    background-clip: padding-box;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.btn-update { 
+    color: white; 
+    border: 2px solid white; 
+    background-color: transparent; 
+}
+
+.btn-cancelar { 
+    color: white; 
+    border: 2px solid white; 
+    background-color: transparent; 
+}
+
+.btn-update:hover { 
+    background-color: white;
+    color: green;
+}
+
+.btn-cancelar:hover {
+    background-color: white;
+    color: red; 
+}
+
+/* ================= SELECT PERFIL ================= */
+body.edit-page select {
+    width: 200px;
+    padding: 10px 12px;
+    font-size: 1.4rem;
+    border: 2px solid white;
+    border-radius: 8px;
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    outline: none;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    display: block;
+    margin: 0 auto;
+    margin-top: .5rem;
+}
+
+body.edit-page select:focus {
+    border-color: #4d7cff;
+    box-shadow: 0 0 6px rgba(77,124,255,0.6);
+}
+
+body.edit-page select option {
+    background-color: white;
+    color: var(--main-color);
+    padding: 10px;
+    font-size: 1.4rem;
+}
+
+/* ================= CENTRALIZA PERFIL ================= */
+.edit-perfil {
+    text-align: center !important;
+    display: block !important;
+    margin: 0 auto !important;
 }
