@@ -857,3 +857,119 @@ body.edit-page select option {
     display: block !important;
     margin: 0 auto !important;
 }
+
+/* ================= CREATE USER ================= */
+body.create-user {
+    background: linear-gradient(white, var(--main-color));
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+body.create-user .tela-adicionar {
+    position: fixed;
+    top: 15%;
+    left: 38.5%;
+    transform: (-50%, -50%);
+    width: 450px;
+    height: 700px;
+    padding: 0;
+    display: block;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 30px;
+    color: white;
+    z-index: 50;
+    background: linear-gradient(var(--main-color), #3963d4);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+}
+
+body.create-user .tela-adicionar h2 {
+    padding: 1rem 0 2rem 0;
+    font-weight: 700;
+    font-size: 3.5rem;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 2rem;
+    width: 70%;
+}
+
+body.create-user .tela-adicionar label {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-left: 7rem;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+body.create-user .tela-adicionar input[type="email"],
+body.create-user .tela-adicionar input[type="text"],
+body.create-user .tela-adicionar input[type="password"] {
+    width: 70%;
+    max-width: 380px;
+    padding: 1.2rem 1rem;
+    border-radius: 12px;
+    margin: 0 auto 1rem auto;
+    display: block;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
+
+body.create-user select {
+    width: 200px;
+    padding: 10px 12px;
+    font-size: 1.4rem;
+    border: 2px solid white;
+    border-radius: 8px;
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    outline: none;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    display: block;
+    margin: 0 auto;
+    margin-top: .5rem;
+}
+
+body.create-user select:focus {
+    border-color: #4d7cff;
+    box-shadow: 0 0 6px rgba(77,124,255,0.6);
+}
+
+body.create-user select option {
+    background-color: white;
+    color: var(--main-color);
+    padding: 10px;
+    font-size: 1.4rem;
+}
+
+body.create-user .btn-update,
+body.create-user .btn-cancelar {
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 56px;
+    padding: 0 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.15rem;
+    line-height: normal;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    background-clip: padding-box;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
