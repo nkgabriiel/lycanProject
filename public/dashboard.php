@@ -28,18 +28,56 @@ if($_SESSION['perfil'] === 'admin') {
     <title>Dashboard</title>
     <link rel="stylesheet" href="../assets/style.css">
 </head>
-<body>
+<body class="dashboard-page">
+
+<!-- ================= HEADER ================= -->
+    <header class="header">
+        <section>
+            <!-- ================= LOGO ================= -->
+            <a href="pagina_inicial.php" class="logo">
+                <img src="../assets/img/iconlycan.png" alt="logo">
+            </a>
+
+            <!-- ================= NAVBAR ================= -->
+            <nav class="navbar">
+                <a href="pagina_inicial.php">HOME</a>
+                <a href="#male">MASCULINO</a>
+                <a href="#female">FEMININO</a>
+                <a href="#about">CONTATO</a>
+            </nav>
+
+            <!-- ================= ICONS / PROFILE ================= -->
+            <div class="icons">
+                <a href="#">
+                    <img width="35" height="35" class="search" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
+                </a>
+
+                <a href="#">
+                    <img width="35" height="35" class="cart" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
+                </a>
+
+                <div class="profile-dropdown-wrapper">
+                    <img width="35" height="35" alt="Perfil" class="profile-icon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png"/>
+
+                    <div class="profile-dropdown" id="profiledropdown" role="menu" aria-labelledby="profiletoggle">
+                        <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
+                        <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
     <div class="tela-inicialadmin">
     <h1>Bem-vindo, <?= $usuario_exib ?></h1>
-    <a href="../app/logout.php", class="btn-cancelar">Sair</a> <hr>
 
     <h2>Gerenciamento de usuários</h2>
 
-    <a href="criar_usuario.php", class="btn-criarusuario">
-        + Adicionar Novo Usuário
-    </a>
+    <div class="btn-dashbody">
+        <a href="../app/logout.php" class="btn-cancel">Sair</a> <hr>
+        <a href="criar_usuario.php" class="btn-add">+ Adicionar Usuário</a>
+    </div>
 
-    
     <?php if (!empty($_SESSION['flash_sucesso'])): ?>
         <div style="color:green"><?= htmlspecialchars($_SESSION['flash_sucesso'])?></div>
         <?php unset($_SESSION['flash_sucesso']); ?>
