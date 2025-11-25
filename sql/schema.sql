@@ -40,3 +40,31 @@ CREATE TABLE IF NOT EXISTS user_logs (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 UPDATE usuarios SET nome = 'Administrador' WHERE email = 'admin@example.com';
+
+
+CREATE TABLE IF NOT EXISTS produtos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  categoria_id INT NULL,
+  preco DECIMAL(10,2) NOT NULL,
+  estoque INT NOT NULL,
+  image_url VARCHAR(255) NULL,
+  FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE SET NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS categorias (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(255) NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE produtos CHANGE name nome VARCHAR(255) NOT NULL;
+
+INSERT INTO categorias(nome) VALUES
+('Camisetas'),
+('Calças'),
+('Shorts'),
+('Tênis'),
+('Acessórios');
+
+ALTER TABLE produtos ADD descricao TEXT NULL AFTER nome;
+Alter TABLE produtos CHANGE image_url imagem_url VARCHAR(255) NULL;

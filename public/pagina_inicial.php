@@ -3,6 +3,16 @@
 require_once __DIR__ . '/../app/verifica_sessao.php';
 require_once __DIR__ . '/../app/config.php';
 
+$pdo = conectar_banco();
+
+$sql = 'SELECT p.*, c.nome AS categoria_nome FROM produtos p LEFT JOIN categorias c ON  p.categoria_id = c.id WHERE p.estoque > 0 ORDER BY nome ASC';
+
+$stmt = $pdo->query($sql);
+$produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
 $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUOTES, 'UTF-8');
 ?>
 
@@ -35,6 +45,13 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
 
             <!-- ================= ICONS / PROFILE ================= -->
             <div class="icons">
+
+            <div id="box_busca">
+                <form method="GET" action="pagina_busca.php">
+                    <input type="text" id="campo_busca" name="busca" placeholder="Pesquisar...">
+                </form>
+            </div>
+
                 <a href="#">
                     <img width="35" height="35" class="search" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
                 </a>
@@ -43,12 +60,19 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                     <img width="35" height="35" class="cart" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
                 </a>
 
-                <div class="profile-dropdown-wrapper">
-                    <img width="35" height="35" alt="Perfil" class="profile-icon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png" alt="user-male-circle"/>
+                <div class="profile-dropdown-wrapper" id="profileWrap">
+                    <img width="35" height="35" alt="Perfil" class="profile-icon" id="profileIcon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png" alt="user-male-circle"/>
 
-                    <div class="profile-dropdown" id="profiledropdown" role="menu" aria-labelledby="profiletoggle">
+                    <div class="profile-dropdown" id="profileMenu" role="menu" aria-labelledby="profiletoggle">
+                    <?php if (!isset($_SESSION['usuario_id'])): ?>
+                    
                         <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
                         <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
+
+                    <?php else: ?>
+                        <a href="<?= BASE_URL ?>/public/meu_perfil.php" class="profile-item">Meu Perfil</a>
+                        <a href="../app/logout.php" class="profile-item">Sair</a>
+                    <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -66,125 +90,32 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
     </div>
 
     <!-- ================= HOMEPAGE CONTENT ================= -->
-    <section class="homepage-content" id="homepage-content">
-        <h2 class="title">Lançamentos & Mais Vendidos</h2>
+    <sectio class="homepage-content" id="homepage-content">
+        <h2 class="title">Lançamentos</h2>
 
         <div class="box-content">
-            <div class="box">
-                <img src="../assets/img/TemplateStreetLycan.jpg" alt="item-1">
+            <?php foreach ($produtos as $p): ?>
 
-                <div class="title-stars">
-                    <h3>Roupa StreetWare</h3>
-                    <div class="stars">
-                        <h2>Avaliações</h2>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star-half-empty.png" alt="star-half-empty"/>
+                <div class="box">
+                    <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="item">
+
+                    <div class="title-stars">
+                        <h3><?= htmlspecialchars($p['nome']) ?></h3>
+                        <div class="stars">
+                            <h2>Avaliações</h2>
+                            ⭐⭐⭐⭐⭐
+                        </div>
                     </div>
-                </div>
-
-                <div class="price">R$ 129,90 <span class="through">R$ 149,99</span> </div>
-                <a href="#" class="btn-homepage">Adicione ao Carrinho</a>
-            </div>
-
-            <div class="box">
-                <img src="../assets/img/TemplateStreetLycan.jpg" alt="item-1">
-
-                <div class="title-stars">
-                    <h3>Roupa StreetWare</h3>
-                    <div class="stars">
-                        <h2>Avaliações</h2>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star-half-empty.png" alt="star-half-empty"/>
+                    <div class="price">
+                        R$ <?= number_format($p['preco'], 2, ',', '.') ?>
+                        <span class="through">R$ 149,99</span>
                     </div>
+                    <a href="#" class="btn-homepage">Adicione ao carrinho</a>
                 </div>
-
-                <div class="price">R$ 129,90 <span class="through">R$ 149,99</span> </div>
-                <a href="#" class="btn-homepage">Adicione ao Carrinho</a>
-            </div>
-
-            <div class="box">
-                <img src="../assets/img/TemplateStreetLycan.jpg" alt="item-1">
-
-                <div class="title-stars">
-                    <h3>Roupa StreetWare</h3>
-                    <div class="stars">
-                        <h2>Avaliações</h2>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star-half-empty.png" alt="star-half-empty"/>
-                    </div>
-                </div>
-
-                <div class="price">R$ 129,90 <span class="through">R$ 149,99</span> </div>
-                <a href="#" class="btn-homepage">Adicione ao Carrinho</a>
-            </div>
-
-            <div class="box">
-                <img src="../assets/img/TemplateStreetLycan.jpg" alt="item-1">
-
-                <div class="title-stars">
-                    <h3>Roupa StreetWare</h3>
-                    <div class="stars">
-                        <h2>Avaliações</h2>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star-half-empty.png" alt="star-half-empty"/>
-                    </div>
-                </div>
-
-                <div class="price">R$ 129,90 <span class="through">R$ 149,99</span> </div>
-                <a href="#" class="btn-homepage">Adicione ao Carrinho</a>
-            </div>
-
-            <div class="box">
-                <img src="../assets/img/TemplateStreetLycan.jpg" alt="item-1">
-
-                <div class="title-stars">
-                    <h3>Roupa StreetWare</h3>
-                    <div class="stars">
-                        <h2>Avaliações</h2>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star-half-empty.png" alt="star-half-empty"/>
-                    </div>
-                </div>
-
-                <div class="price">R$ 129,90 <span class="through">R$ 149,99</span> </div>
-                <a href="#" class="btn-homepage">Adicione ao Carrinho</a>
-            </div>
-
-            <div class="box">
-                <img src="../assets/img/TemplateStreetLycan.jpg" alt="item-1">
-
-                <div class="title-stars">
-                    <h3>Roupa StreetWare</h3>
-                    <div class="stars">
-                        <h2>Avaliações</h2>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star--v1.png" alt="star--v1"/>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/30/star-half-empty.png" alt="star-half-empty"/>
-                    </div>
-                </div>
-
-                <div class="price">R$ 129,90 <span class="through">R$ 149,99</span> </div>
-                <a href="#" class="btn-homepage">Adicione ao Carrinho</a>
-            </div>
+            <?php endforeach; ?>
         </div>
     </section>
+<script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>
 
 </body>
 </html>
