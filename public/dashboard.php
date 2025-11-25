@@ -8,7 +8,6 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Admin', ENT_QUOTE
 $admin_id_logado = $_SESSION['usuario_id'];
 
 $lista_usuarios = [];
-$lista_produtos = [];
 
 if($_SESSION['perfil'] === 'admin') {
 
@@ -17,13 +16,6 @@ if($_SESSION['perfil'] === 'admin') {
 
         $stmt = $pdo->query('SELECT id, nome, email, perfil FROM usuarios ORDER BY nome ASC');
         $lista_usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $sql_produtos = 'SELECT p.*, c.nome as categoria_nome
-                         FROM produtos p
-                         LEFT JOIN categorias c ON p.categoria_id = c.id
-                         ORDER BY p.nome ASC';
-        $stmt_prod = $pdo->query($sql_produtos);
-        $lista_produtos = $stmt_prod->fetchAll(PDO::FETCH_ASSOC);
 
     } catch (PDOException $e) {
         die("Erro ao buscar usuários: ". $e->getMessage());
@@ -134,50 +126,4 @@ if($_SESSION['perfil'] === 'admin') {
         <?php endif ?>
         </div>
 
-        <h2>Gerir Produtos</h2>
-        <a href="<?= BASE_URL ?>/public/produto_form.php">Adicionar Novo Produto</a>
-        <table>
-            <thead>
-                <tr>
-                    <th>Imagem</th>
-                    <th>Nome</th>
-                    <th>Categoria</th>
-                    <th>Preço</th>
-                    <th>Estoque</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (empty($lista_produtos)): ?>
-                <tr>
-                    <td colspan="6">Nenhum produto cadastrado.</td>
-                </tr>
-                 <?php else: ?>        
-                    <?php foreach($lista_produtos as $produto): ?>
-                        <tr>
-                            <td>
-                                <?php if(!empty($produto['imagem_url'])): ?>
-                                    <img src="<?= htmlspecialchars($produto['imagem_url'])?>" alt="Prod">
-                                <?php else: ?>
-                                    <span>Sem img</span>
-                                <?php endif; ?>
-                            </td>
-                            <td><?= htmlspecialchars($produto['nome']) ?></td>
-                            <td><?= htmlspecialchars($produto['categoria_nome'] ?? 'Sem categoria') ?></td>
-                            <td>R$ <?= number_format($produto['preco'], 2, ',', '.') ?></td>
-                            <td><?= $produto['estoque'] ?></td>
-                            <td>
-                                <a href="<?= BASE_URL ?>/public/produto_form.php?id=<?=$produto['id']?>">Editar</a>
-
-                                <form action="<?= BASE_URL ?>/app/deletar_produto.php" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir esse produto?');">
-                                    <input type="hidden" name="produto_id" value="<?= $produto['id'] ?>">
-                                    <button type="submit">Deletar</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                        <?php endif; ?>            
-            </tbody>
-        </table>
-</body>
-</html> 
+        <a href="<?= BASE_URL ?>/public/produto_listar.php">Gerir Produtos</a>
