@@ -63,6 +63,31 @@ function registrarLog($acao, $detalhes = null) {
         return bin2hex($bytes);
     }
 
+    function csrf_generate() {
+        if(empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+
+        return $_SESSION['csrf_token'];
+    }
+
+    function csrf_validate($token_enviado) {
+        if(empty($_SESSION['csrf_token']) || empty($token_enviado) || !hash_equals($_SESSION['csrf_token'], $token_enviado)) {
+            return false;
+        }
+        return true;
+    }
+
+    function normalize($string) {
+        $normal = iconv('UTF-8', 'ASCII//TRANSLIT', $string);
+        return strtolower($normal);
+    }
+
+    function baseTerm($palavra) {
+        return rtrim($palavra, "sS");
+    }
+
+
     function validarForcaSenha($senha) {
         $erros = [];
          if(strlen($senha)<8) $erros[]='Senha com mínimo de 8 caracteres';

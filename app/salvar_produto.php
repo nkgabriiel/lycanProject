@@ -34,7 +34,7 @@ try {
         $_SESSION['flash_sucesso'] = 'Produto atualizado com sucesso';
 
     } else {
-        $sql = 'INSERT INTO produtos(nome, descricao, preco, estoque, imagem_url, categoria_id) VALUES (?, ?, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO produtos(nome, descricao, preco, estoque, imagem_url, categoria_id, data_lancamento) VALUES (?, ?, ?, ?, ?, ?, NOW()';
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$nome, $descricao, $preco, $estoque, $imagem_url, $categoria_id]);

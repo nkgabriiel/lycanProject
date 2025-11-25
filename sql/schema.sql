@@ -68,3 +68,5 @@ INSERT INTO categorias(nome) VALUES
 
 ALTER TABLE produtos ADD descricao TEXT NULL AFTER nome;
 Alter TABLE produtos CHANGE image_url imagem_url VARCHAR(255) NULL;
+ALTER TABLE produtos ADD data_lancamento DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+UPDATE produtos SET data_lancamento = NOW() WHERE data_lancamento IS NULL;

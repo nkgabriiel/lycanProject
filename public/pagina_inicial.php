@@ -5,7 +5,7 @@ require_once __DIR__ . '/../app/config.php';
 
 $pdo = conectar_banco();
 
-$sql = 'SELECT p.*, c.nome AS categoria_nome FROM produtos p LEFT JOIN categorias c ON  p.categoria_id = c.id WHERE p.estoque > 0 ORDER BY nome ASC';
+$sql = 'SELECT p.*, c.nome AS categoria_nome FROM produtos p LEFT JOIN categorias c ON  p.categoria_id = c.id WHERE p.estoque > 0 ORDER BY p.data_lancamento DESC LIMIT 3';
 
 $stmt = $pdo->query($sql);
 $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -52,7 +52,7 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                 </form>
             </div>
 
-                <a href="#">
+                <a href="pagina_busca.php">
                     <img width="35" height="35" class="search" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
                 </a>
 

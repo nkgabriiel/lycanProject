@@ -127,3 +127,4 @@ if($_SESSION['perfil'] === 'admin') {
         </div>
 
         <a href="<?= BASE_URL ?>/public/produto_listar.php">Gerir Produtos</a>
+        <a href="<?= BASE_URL ?>/public/logs.php">Registros de Auditoria</a>
