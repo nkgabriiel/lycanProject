@@ -47,6 +47,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':nome' => $nome
     ];
         if($stmt->execute($params)) {
+            registrarLog('Cadastro', 'Novo usuário: ' . $email);
             $_SESSION['flash_sucesso'] = 'Cadastro Realizado, faça login!';
             redirecionar('/public/index.php');
         }

@@ -39,6 +39,17 @@ function redirecionar($caminho_absoluto) {
     exit;
 }
 
+function registrarLog($acao, $detalhes = null) {
+    try {
+        $pdo = conectar_banco();
+        $usuario_id = $_SESSION['usuario_id'] ?? null;
+        $stmt = $pdo->prepare("INSERT INTO user_logs (usuario_id, acao, detalhes, data_hora) VALUES (?, ?, ?, NOW())");
+        $stmt->execute([$usuario_id, $acao, $detalhes]);
+        
+    } catch (Exception $e) {
+        error_Log("Erro ao registrar log: " . $e->getMessage());
+    }
+}
     function sanitizar($string) {
         return htmlspecialchars($string ?? '', ENT_QUOTES, 'UTF-8');
     }

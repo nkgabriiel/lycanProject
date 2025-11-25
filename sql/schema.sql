@@ -29,3 +29,14 @@ CREATE TABLE IF NOT EXISTS password_reset (
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS user_logs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario_id INT NULL,
+  acao VARCHAR(255) NOT NULL,
+  detalhes TEXT NOT NULL,
+  data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE SET NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+UPDATE usuarios SET nome = 'Administrador' WHERE email = 'admin@example.com';
