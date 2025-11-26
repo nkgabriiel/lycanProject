@@ -175,6 +175,11 @@ section {
         contrast(88%);
 }
 
+.profileWrap {
+    position: relative;
+    display: inline-block;
+}
+
 /* ================= HOME CONTAINER ================= */
 .home-container {
     background-image: url("../assets/img/TemplateStreetLycan.jpg");
@@ -1344,4 +1349,246 @@ body.singUp-page .tela-cadastro .login-text .btn-login {
 
 body.singUp-page .tela-cadastro .login-text .btn-login:hover {
     text-decoration: underline;
+}
+
+/* ================= CART PAGE, PRODUCT PAGES, SEARCH PAGE ================= */
+body.logs-page,
+body.search-page,
+body.productform-page,
+body.product-page,
+body.tableproduct-page,
+body.cart-page {
+    background: linear-gradient(white, var(--main-color));
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+body.productform-page .tela-adicionarproduto,
+body.tableproduct-page .tela-tabelaproduto {
+    position: fixed;
+    top: 20%;
+    left: 15%;
+    transform: (-50%, -50%);
+    width: 1360px;
+    height: 570px;
+    padding: 0;
+    display: block;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 30px;
+    color: white;
+    z-index: 50;
+    background: linear-gradient(var(--main-color), #3963d4);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+}
+
+body.productform-page h1,
+body.tableproduct-page h2 {
+    padding: 1rem 0 2rem 0;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+    width: 70%;
+}
+
+.btn-productform,
+.btn-tablepage {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+body.productform-page .btn-registerproduct,
+body.productform-page .btn-backtotable,
+body.tableproduct-page .btn-backtodash,
+body.tableproduct-page .btn-addproduct {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 220px;
+    height: 55px;
+
+    font-size: 1.8rem;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1;
+
+    background: transparent;
+    color: inherit;
+    text-decoration: none;
+    border: 2px solid;
+    border-radius: 8px;
+
+    border-width: 2px;
+}
+
+button.btn-registerproduct,
+button.btn-backtotable,
+button.btn-addproduct,
+button.btn-backtodash {
+    padding: 0;
+    border: 2px solid;
+    background: transparent;
+    font: inherit;
+}
+
+body.productform-page .btn-backtotable,
+body.tableproduct-page .btn-backtodash {
+    color: red;
+    margin-left: 2rem;
+}
+
+body.productform-page .btn-backtotable:hover,
+body.tableproduct-page .btn-backtodash:hover {
+    background-color: red;
+    color: white;
+}
+
+body.productform-page .btn-registerproduct,
+body.tableproduct-page .btn-addproduct {
+    color: green;
+}
+
+body.productform-page .btn-registerproduct:hover,
+body.tableproduct-page .btn-addproduct:hover {
+    background-color: green;
+    color: white;
+}
+
+.btn-delete {
+    background: transparent;
+    color: red;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 3rem;
+    font-size: 1.2rem;
+}
+
+.btn-delete:hover {
+    text-decoration: underline;
+}
+
+.tableproduct-page .btn-editar{
+    margin-top: 3rem;
+}
+
+.btn-editar {
+    color: #4d7cff;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.2rem;
+}
+
+.btn-editar:hover {
+    text-decoration: underline;
+}
+
+.produto-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+}
+
+.produto-form .campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+.produto-form label {
+    margin-bottom: 4px;
+}
+
+body.productform-page .produto-form {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+body.productform-page .produto-form-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+body.productform-page .produto-form-grid .col-esquerda,
+body.productform-page .produto-form-grid .col-direita {
+    flex: 1;
+}
+
+body.productform-page .produto-form-grid .campo {
+    margin-bottom: 1.8rem;
+}
+
+body.productform-page .produto-form-grid .campo label {
+    display: block;
+    font-size: 1.6rem;
+    color: #ffffff;
+    margin-bottom: 0.4rem;
+    text-align: left;
+}
+
+body.productform-page .produto-form-grid .campo input,
+body.productform-page .produto-form-grid .campo textarea,
+body.productform-page .produto-form-grid .campo select {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body.productform-page .produto-form-grid .campo input,
+body.productform-page .produto-form-grid .campo textarea,
+body.productform-page .produto-form-grid .campo select {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0.9rem 1.2rem;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 1.4rem;
+    box-sizing: border-box;
+    color: #000;
+}
+
+body.productform-page .produto-form-grid .campo textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+body.productform-page select {
+    width: 200px;
+    padding: 10px 12px;
+    font-size: 1.4rem;
+    border: 2px solid white;
+    border-radius: 8px;
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    outline: none;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    display: block;
+    margin: 0 auto;
+    margin-top: .5rem;
+}
+
+body.productform-page select:focus {
+    border-color: #4d7cff;
+    box-shadow: 0 0 6px rgba(77,124,255,0.6);
+}
+
+body.productform-page select option {
+    background-color: white;
+    color: var(--main-color);
+    padding: 10px;
+    font-size: 1.4rem;
 }
