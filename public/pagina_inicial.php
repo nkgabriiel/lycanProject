@@ -10,6 +10,10 @@ $sql = 'SELECT p.*, c.nome AS categoria_nome FROM produtos p LEFT JOIN categoria
 $stmt = $pdo->query($sql);
 $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$sql_vendas = 'SELECT p.*, c.nome AS categoria_nome FROM produtos p LEFT JOIN categorias c ON p.categoria_id = c.id WHERE p.estoque > 0 ORDER BY p.vendas DESC LIMIT 3';
+
+$stmt = $pdo->query($sql_vendas);
+$mais_vendidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
@@ -90,17 +94,20 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
     </div>
 
     <!-- ================= HOMEPAGE CONTENT ================= -->
-    <sectio class="homepage-content" id="homepage-content">
+    <section class="homepage-content" id="homepage-content">
         <h2 class="title">Lançamentos</h2>
 
         <div class="box-content">
             <?php foreach ($produtos as $p): ?>
 
                 <div class="box">
-                    <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="item">
-
+                    <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
+                    <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="item" ">
+                    </a>
                     <div class="title-stars">
+                        <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
                         <h3><?= htmlspecialchars($p['nome']) ?></h3>
+                        </a>
                         <div class="stars">
                             <h2>Avaliações</h2>
                             ⭐⭐⭐⭐⭐
@@ -110,9 +117,38 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                         R$ <?= number_format($p['preco'], 2, ',', '.') ?>
                         <span class="through">R$ 149,99</span>
                     </div>
-                    <a href="#" class="btn-homepage">Adicione ao carrinho</a>
+                    <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $p['id'] ?>" class="bth-homepage">Adicione ao carrinho</a>
                 </div>
             <?php endforeach; ?>
+        </div>
+    </section>
+
+    <hr>
+
+    <section class="homepage-content" id="homepage-content">
+        <h2 class="title">Mais Vendidas</h2>
+        <div class="box-content">
+            <?php foreach ($mais_vendidos as $p): ?>
+                <div class="box">
+                    <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
+                    <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="item">
+                    </a>    
+                        <div class="title-stars">
+                            <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
+                            <h3><?= htmlspecialchars($p['nome']) ?></h3>
+                            </a>
+                            <div class="stars">
+                                <h2>Avaliações</h2>
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                        <div class="price">
+                            R$ <?= number_format($p['preco'], 2, ',', '.') ?>
+                            <span class="through">R$ 149,99</span>
+                        </div>
+                        <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $p['id'] ?>" class="bth-homepage">Adicione ao carrinho</a>
+                </div>
+            <?php endforeach; ?>    
         </div>
     </section>
 <script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>

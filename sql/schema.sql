@@ -70,3 +70,9 @@ ALTER TABLE produtos ADD descricao TEXT NULL AFTER nome;
 Alter TABLE produtos CHANGE image_url imagem_url VARCHAR(255) NULL;
 ALTER TABLE produtos ADD data_lancamento DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 UPDATE produtos SET data_lancamento = NOW() WHERE data_lancamento IS NULL;
+
+ALTER TABLE produtos ADD vendas INT NOT NULL DEFAULT 0;
+
+UPDATE produtos SET vendas = 10 WHERE id = 1;
+UPDATE produtos SET vendas = 5 WHERE id = 2;
+UPDATE produtos SET vendas = 7 WHERE id = 3;
