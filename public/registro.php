@@ -67,21 +67,82 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title>Cadastro</title>
 <link rel="stylesheet" href="../assets/style.css">
 </head>
-<body>
-    <div class="tela-cadastro">
-<h2>Cadastro</h2>
-<?php if($erro) echo "<p style='color:red'>$erro</p>"; ?>
-<?php if($sucesso) echo "<p style='color:green'>".sanitizar($sucesso)."</p>"; ?>
+<body class="singUp-page">
 
-<form method="POST" action="registro.php">
-<label>Nome: <input type="text" name="nome"></label><br><br>
-<label>E-mail: <input type="email" name="email"></label><br><br>
-<label>Senha: <input type="password" name="senha"></label><br><br>
-<label>Confirmar Senha: <input type="password" name="confirmar_senha"></label><br><br>
-<button type="submit", class="btn-criarconta">Criar Conta</button>
-</form>
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+        <section>
+            <!-- ================= LOGO ================= -->
+            <a href="pagina_inicial.php" class="logo">
+                <img src="../assets/img/iconlycan.png" alt="logo">
+            </a>
 
-<p>Já tem conta? <a href="index.php", class="btn-login">Login</a></p>
+            <!-- ================= NAVBAR ================= -->
+            <nav class="navbar">
+                <a href="pagina_inicial.php">HOME</a>
+                <a href="#male">MASCULINO</a>
+                <a href="#female">FEMININO</a>
+                <a href="#about">CONTATO</a>
+            </nav>
+
+            <!-- ================= ICONS / PROFILE ================= -->
+            <div class="icons">
+                <a href="#">
+                    <img width="35" height="35" class="search" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
+                </a>
+
+                <a href="#">
+                    <img width="35" height="35" class="cart" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
+                </a>
+
+                <div class="profile-dropdown-wrapper">
+                    <img width="35" height="35" alt="Perfil" class="profile-icon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png"/>
+
+                    <div class="profile-dropdown" id="profiledropdown" role="menu" aria-labelledby="profiletoggle">
+                        <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
+                        <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+   <div class="tela-cadastro">
+    <h2>Cadastro</h2>
+    <?php if($erro) echo "<p style='color:red'>$erro</p>"; ?>
+    <?php if($sucesso) echo "<p style='color:green'>".sanitizar($sucesso)."</p>"; ?>
+
+    <form method="POST" action="registro.php">
+
+        <div class="campo">
+            <label for="nome">Nome:</label>
+            <input id="nome" type="text" name="nome">
+        </div>
+
+        <div class="campo">
+            <label for="email">E-mail:</label>
+            <input id="email" type="email" name="email">
+        </div>
+
+        <div class="campo">
+            <label for="senha">Senha:</label>
+            <input id="senha" type="password" name="senha">
+        </div>
+
+        <div class="campo">
+            <label for="confirmar_senha">Confirmar Senha:</label>
+            <input id="confirmar_senha" type="password" name="confirmar_senha">
+        </div>
+
+        <div class="btn-singUp">
+            <button type="submit" class="btn-criarconta">Criar Conta</button>
+        </div>
+
+        <p class="login-text">
+            Já tem conta? <a href="index.php" class="btn-login">Login</a>
+        </p>
+    </form>
 </div>
+
 </body>
 </html>
