@@ -102,7 +102,7 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
 
                 <div class="box">
                     <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
-                    <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="item" ">
+                    <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="item">
                     </a>
                     <div class="title-stars">
                         <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
@@ -151,7 +151,7 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
             <?php endforeach; ?>    
         </div>
     </section>
-<script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>
+<script src="<?= BASE_URL ?>/scripts/utils.js"></script>
 
 </body>
 </html>

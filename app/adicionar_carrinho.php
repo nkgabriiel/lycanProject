@@ -5,12 +5,12 @@ require_once __DIR__ . '/config.php';
     die('Produto inválido.');
  }
 
- $id = $_GET['id'];
+ $id = $_GET['id'] ?? null;
 
  $pdo = conectar_banco();
 
  $stmt = $pdo->prepare('SELECT * FROM produtos WHERE id = ?');
- $stmt->execute(['id']);
+ $stmt->execute(['$id']);
  $produto = $stmt->fetch(PDO::FETCH_ASSOC);
 
  if(!$produto) {
