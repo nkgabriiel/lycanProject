@@ -33,6 +33,9 @@ $carrinho = $_SESSION['carrinho'] ?? [];
         </tr>
         <?php foreach($carrinho as $item): ?>
         <tr>
+            <td>
+                <img src="<?= htmlspecialchars($item['imagem_url']) ?>" alt="Produto" width="60" style="object-fit: cover; border-radius: 5px">
+            </td>
             <td><?= htmlspecialchars($item['nome']) ?></td>
             <td><?= htmlspecialchars($item['quantidade']) ?></td>
             <td><?= number_format($item['preco'], 2, ',', '.') ?></td>
