@@ -104,25 +104,38 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
 
         <div class="box-content">
             <?php foreach ($lancamento as $l): ?>
-
                 <div class="box">
                     <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $l['id'] ?>">
-                    <img src="<?= htmlspecialchars($l['imagem_url']) ?>" alt="item">
+                        <img src="<?= htmlspecialchars($l['imagem_url']) ?>" alt="item">
                     </a>
-                    <div class="title-stars">
-                        <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $l['id'] ?>">
-                        <h3><?= htmlspecialchars($l['nome']) ?></h3>
-                        </a>
-                        <div class="stars">
-                            <h2>Avaliações</h2>
-                            ⭐⭐⭐⭐⭐
+
+                    <div class="info-area">
+                        <!-- Linha de cima: nome + avaliações à direita -->
+                        <div class="title-stars">
+                            <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $l['id'] ?>">
+                                <h3><?= htmlspecialchars($l['nome']) ?></h3>
+                            </a>
+
+                            <div class="stars">
+                                <span class="label-avaliacoes">Avaliações</span>
+                                <span class="stars-icons">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+
+                        <!-- Linha de baixo: preço + botão -->
+                        <div class="price-row">
+                            <div class="price">
+                                <span class="current-price">
+                                    R$ <?= number_format($l['preco'], 2, ',', '.') ?>
+                                </span>
+                                <span class="old-price">R$ 149,99</span>
+                            </div>
+
+                            <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $l['id'] ?>" class="btn-buy">
+                                Adicionar ao carrinho
+                            </a>
                         </div>
                     </div>
-                    <div class="price">
-                        R$ <?= number_format($l['preco'], 2, ',', '.') ?>
-                        <span class="through">R$ 149,99</span>
-                    </div>
-                    <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $l['id'] ?>" class="bth-homepage">Adicione ao carrinho</a>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -137,11 +150,13 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
             <?php foreach ($mais_vendidos as $v): ?>
                 <div class="box">
                     <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $v['id'] ?>">
-                    <img src="<?= htmlspecialchars($v['imagem_url']) ?>" alt="item">
-                    </a>    
+                        <img src="<?= htmlspecialchars($v['imagem_url']) ?>" alt="item">
+                    </a>
+
+                    <div class="info-area">
                         <div class="title-stars">
                             <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $v['id'] ?>">
-                            <h3><?= htmlspecialchars($v['nome']) ?></h3>
+                                <h3><?= htmlspecialchars($v['nome']) ?></h3>
                             </a>
 
                             <div class="stars">
@@ -149,17 +164,24 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                                 <span class="stars-icons">⭐⭐⭐⭐⭐</span>
                             </div>
                         </div>
-                        <div class="price">
-                            R$ <?= number_format($v['preco'], 2, ',', '.') ?>
-                            <span class="through">R$ 149,99</span>
+
+                        <div class="price-row">
+                            <div class="price">
+                                <span class="current-price">
+                                    R$ <?= number_format($v['preco'], 2, ',', '.') ?>
+                                </span>
+                                <span class="old-price">R$ 149,99</span>
+                            </div>
+
+                            <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $v['id'] ?>" class="btn-buy">
+                                Adicionar ao carrinho
+                            </a>
                         </div>
-                        <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $v['id'] ?>" class="bth-homepage">Adicione ao carrinho</a>
+                    </div>
                 </div>
-            <?php endforeach; ?>    
+            <?php endforeach; ?>
         </div>
     </section>
-<script src="<?= BASE_URL ?>/scripts/utils.js"></script>
-
     <script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>
 </body>
 </html>
