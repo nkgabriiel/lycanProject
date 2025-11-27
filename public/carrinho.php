@@ -49,18 +49,33 @@ $carrinho = $_SESSION['carrinho'] ?? [];
         <?php endforeach; ?>
     </table>
     <hr>
-    <h2>Total Geral: R$
+
+    <input type="text"  id="cep" placeholder="00000-000" maxlength="9">
+    <button onclick="buscarCEP()">Buscar</button>
+
+    <input type="text" id="cidade" readonly>
+    <input type="text" id="estado" readonly>
+    <p id="resultado"></p>
+
+    <h3>Frete: R$ <span id="valorFrete">0,00</span></h3>
+    <h3>Valor dos produtos: R$
+        <span id="subtotalValor">
     <?php 
        $sum = 0;
        foreach($carrinho as $item) {
-        $sum = $item['quantidade'] * $item['preco'];
+        $sum += $item['quantidade'] * $item['preco'];
        } 
        echo number_format($sum,2 ,',', '.');
 
     ?>
-    </h2>
+    </span>
+    </h3>
+
+<h2>Total Final: R$ <span id="totalFinal"><?= number_format($sum, 2, ',', '.') ?></span></h2>
 
     <a href="#" class="btn-homepage">Finalizar Compra</a>
 <?php endif; ?>
+
+<script src="<?= BASE_URL ?>/scripts/utils.js"></script>
 </body>
 </html>

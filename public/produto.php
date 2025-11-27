@@ -9,14 +9,16 @@ if (!$id) {
     die('Produto inválido');
 }
 
-$sql = 'SELECT p.*, c.nome AS categoria_nome FROM produtos P LEFT JOIN categorias c ON p.categoria_id = c.id WHERE p.id = :id LIMIT 1';
-$stmt = $pdo->prepare($sql);
-$stmt->execute([':id' => $id]);
-$produto = $stmt->fetch(PDO::FETCH_ASSOC);
+$url = BASE_URL . '/app/api/produtos.php?id=' . urlencode($id);
 
-if (!$produto) {
-    die('Produto não encontrado.');
-}
+$json = file_get_contents($url);
+$produto = json_decode($json, true);
+
+if ($produto['status'] !== 'ok') {
+    echo '<p>Produto não encontrado</p>';
+} 
+
+$produto = $produto['data'];
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +58,7 @@ if (!$produto) {
 
     <br><br>
 
-    <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $p['id'] ?>" class="btn-homepage" style="font-size: 20px; padding=10px 20px;">
+    <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $produto['id'] ?>" class="btn-homepage" style="font-size: 20px; padding=10px 20px;">
         Adicionar ao carrinho
     </a>
     </div>
