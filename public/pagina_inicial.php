@@ -130,7 +130,7 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                                 <span class="old-price">R$ 149,99</span>
                             </div>
 
-                            <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $p['id'] ?>" class="btn-buy">
+                            <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $l['id'] ?>" class="btn-buy">
                                 Adicionar ao carrinho
                             </a>
                         </div>
@@ -178,10 +178,9 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>    
+            <?php endforeach; ?>
         </div>
     </section>
-
     <script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>
 </body>
 </html>

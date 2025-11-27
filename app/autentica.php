@@ -53,7 +53,6 @@ $_SESSION['falhas_login'] = 0;
 
 registrarLog('Login', 'Usuário logou no sistema');
 
-$_SESSION['flash_sucesso'] = 'Login realizado com sucesso.';
 
 if($user['perfil'] === 'admin') {
     redirecionar('/public/dashboard.php');
