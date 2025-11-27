@@ -50,15 +50,18 @@ $produto = $produto['data'];
             <!-- ================= ICONS / PROFILE ================= -->
             <div class="icons">
                 <a href="#">
-                    <img width="35" height="35" class="search" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
+                    <img width="35" height="35" class="search"
+                         src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
                 </a>
 
                 <a href="#">
-                    <img width="35" height="35" class="cart" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
+                    <img width="35" height="35" class="cart"
+                         src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
                 </a>
 
                 <div class="profile-dropdown-wrapper">
-                    <img width="35" height="35" alt="Perfil" class="profile-icon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png"/>
+                    <img width="35" height="35" alt="Perfil" class="profile-icon"
+                         src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png"/>
 
                     <div class="profile-dropdown" id="profiledropdown" role="menu" aria-labelledby="profiletoggle">
                         <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
@@ -69,40 +72,100 @@ $produto = $produto['data'];
         </section>
     </header>
 
-    <h1><?= htmlspecialchars($produto['nome']) ?></h1>
+    <!-- TÍTULO DO PRODUTO -->
+    <h1 class="product-title-page">
+        <?= htmlspecialchars($produto['nome']) ?>
+    </h1>
 
-    <div class="#">
+    <!-- WRAPPER GERAL -->
+    <div class="product-wrapper">
 
-        <div class="#">
-    <div class="#">
-        <img src="<?= htmlspecialchars($produto['imagem_url']) ?>" alt="<?= htmlspecialchars($produto['nome']) ?>" width="350">
+        <!-- ============ GALERIA (thumbs + imagem grande) ============ -->
+        <div class="product-gallery">
+
+            <!-- Thumbs à esquerda -->
+            <div class="product-thumbs">
+                <?php for ($i = 0; $i < 4; $i++): ?>
+                    <button class="product-thumb-btn <?= $i === 0 ? 'active' : '' ?>"
+                            data-image="<?= htmlspecialchars($produto['imagem_url']) ?>">
+                        <img src="<?= htmlspecialchars($produto['imagem_url']) ?>"
+                             alt="<?= htmlspecialchars($produto['nome']) ?>">
+                    </button>
+                <?php endfor; ?>
+            </div>
+
+            <!-- Imagem principal -->
+            <div class="product-main-image">
+                <img id="main-product-image"
+                     src="<?= htmlspecialchars($produto['imagem_url']) ?>"
+                     alt="<?= htmlspecialchars($produto['nome']) ?>">
+            </div>
+        </div>
+
+        <!-- ============ BOX DE INFORMAÇÕES ============ -->
+        <aside class="product-info">
+            <!-- Avaliação -->
+            <div class="product-rating">
+                <span class="product-stars">⭐⭐⭐⭐⭐</span>
+                <span class="product-rating-text">Avaliações</span>
+            </div>
+
+            <!-- Preços -->
+            <div class="product-price-box">
+                <span class="product-price">
+                    R$ <?= number_format($produto['preco'], 2, ',', '.') ?>
+                </span>
+                <span class="product-old-price">R$ 149,99</span>
+            </div>
+
+            <!-- Categoria -->
+            <p class="product-category">
+                Categoria: <?= htmlspecialchars($produto['categoria_nome']) ?>
+            </p>
+
+            <!-- Descrição -->
+            <p class="product-description">
+                <?= nl2br(htmlspecialchars($produto['descricao'])) ?>
+            </p>
+
+            <!-- Tamanho -->
+            <div class="product-size">
+                <label for="tamanho">Tamanho</label>
+                <select id="tamanho" name="tamanho">
+                    <option value="">Selecione</option>
+                    <option value="P">P</option>
+                    <option value="M">M</option>
+                    <option value="G">G</option>
+                    <option value="GG">GG</option>
+                </select>
+            </div>
+
+            <!-- Botões -->
+            <div class="product-actions">
+                <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $produto['id'] ?>"
+                   class="btn-product-primary">
+                    Adicionar ao carrinho
+                </a>
+
+                <a href="<?= BASE_URL ?>/public/pagina_inicial.php"
+                   class="btn-product-primary btn-product-secondary">
+                    Voltar
+                </a>
+            </div>
+        </aside>
     </div>
 
-    <div class="#">
-        <h2>R$ <?= number_format($produto['preco'], 2, ',', '.')?></h2>
+    <script>
+        document.querySelectorAll('.product-thumb-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const src = btn.getAttribute('data-image');
+                document.getElementById('main-product-image').src = src;
 
-        <p>Categoria: <?= htmlspecialchars($produto['categoria_nome']) ?></p>
-
-        <p><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
-    </div>
-
-    <label for="tamanho">Tamanho:</label>
-    <select id="tamanho" name="tamanho">
-        <option value="">Selecione</option>
-        <option>P</option>
-        <option>M</option>
-        <option>G</option>
-        <option>GG</option>
-    </select>
-
-    <br><br>
-
-    <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $produto['id'] ?>" class="btn-homepage" style="font-size: 20px; padding=10px 20px;">
-        Adicionar ao carrinho
-    </a>
-    </div>
-</div>
-<br><br>
-<a href="<?= BASE_URL ?>/public/pagina_inicial.php">Voltar</a>
+                document.querySelectorAll('.product-thumb-btn')
+                    .forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>

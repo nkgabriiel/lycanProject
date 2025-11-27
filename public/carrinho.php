@@ -52,69 +52,91 @@ $carrinho = $_SESSION['carrinho'] ?? [];
         </section>
     </header>
 
-<h1>Seu carrinho</h1>
+<div class="tela-carrinho">
+    <h1>Seu carrinho</h1>
 
-<a href="<?= BASE_URL ?>/public/pagina_inicial.php">Voltar</a>
+    <a href="<?= BASE_URL ?>/public/pagina_inicial.php">Voltar</a>
 
-<hr>
-
-<?php if (empty($carrinho)): ?>
-    <p>Seu carrinho está vazio</p>
-
-<?php else: ?>
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Preçoo</th>
-            <th>Total</th>
-            <th>Ações</th>
-        </tr>
-        <?php foreach($carrinho as $item): ?>
-        <tr>
-            <td>
-                <img src="<?= htmlspecialchars($item['imagem_url']) ?>" alt="Produto" width="60" style="object-fit: cover; border-radius: 5px">
-            </td>
-            <td><?= htmlspecialchars($item['nome']) ?></td>
-            <td><?= htmlspecialchars($item['quantidade']) ?></td>
-            <td><?= number_format($item['preco'], 2, ',', '.') ?></td>
-            <td>R$ <?= number_format($item['quantidade'] * $item['preco'], 2, ',', '.') ?></td>
-            <td>
-                <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $item['id'] ?>">+</a>
-                <a href="<?= BASE_URL ?>/app/remover_carrinho.php?id=<?= $item['id'] ?>">-</a>
-                <a href="<?= BASE_URL ?>/app/deletar_carrinho.php?id=<?= $item['id'] ?>">Remover</a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
     <hr>
 
-    <input type="text"  id="cep" placeholder="00000-000" maxlength="9">
-    <button onclick="buscarCEP()">Buscar</button>
+    <?php if (empty($carrinho)): ?>
+        <p>Seu carrinho está vazio</p>
 
-    <input type="text" id="cidade" readonly>
-    <input type="text" id="estado" readonly>
-    <p id="resultado"></p>
+    <?php else: ?>
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>Produto</th>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Total</th>
+                <th>Ações</th>
+            </tr>
+            <?php foreach($carrinho as $item): ?>
+            <tr>
+                <td>
+                    <img src="<?= htmlspecialchars($item['imagem_url']) ?>" alt="Produto" width="60" style="object-fit: cover; border-radius: 5px">
+                </td>
+                <td><?= htmlspecialchars($item['nome']) ?></td>
+                <td><?= htmlspecialchars($item['quantidade']) ?></td>
+                <td><?= number_format($item['preco'], 2, ',', '.') ?></td>
+                <td>R$ <?= number_format($item['quantidade'] * $item['preco'], 2, ',', '.') ?></td>
+                <td class="cart-actions">
+                    <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $item['id'] ?>" class="btn-cart btn-cart-small">+</a>
+                    <a href="<?= BASE_URL ?>/app/remover_carrinho.php?id=<?= $item['id'] ?>" class="btn-cart btn-cart-small">-</a>
+                    <a href="<?= BASE_URL ?>/app/deletar_carrinho.php?id=<?= $item['id'] ?>" class="btn-cart btn-cart-remove">Remover</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
 
-    <h3>Frete: R$ <span id="valorFrete">0,00</span></h3>
-    <h3>Valor dos produtos: R$
-        <span id="subtotalValor">
-    <?php 
-       $sum = 0;
-       foreach($carrinho as $item) {
-        $sum += $item['quantidade'] * $item['preco'];
-       } 
-       echo number_format($sum,2 ,',', '.');
+        <hr>
 
-    ?>
-    </span>
-    </h3>
+        <div class="cart-summary-row">
+            <!-- FRETE (ESQUERDA) -->
+            <div class="cart-frete">
 
-<h2>Total Final: R$ <span id="totalFinal"><?= number_format($sum, 2, ',', '.') ?></span></h2>
+                <div class="frete-inputs">
+                    <input type="text" id="cep" placeholder="00000-000" maxlength="9">
+                    <button type="button" onclick="buscarCEP()" class="btn-cart btn-cart-small">Buscar</button>
+                </div>
 
-    <a href="#" class="btn-homepage">Finalizar Compra</a>
-<?php endif; ?>
+                <p>Frete: R$ <span id="valorFrete">0,00</span></p>
+                <p id="resultado"></p>
 
-<script src="<?= BASE_URL ?>/scripts/utils.js"></script>
+                <div class="statecity">
+                <input type="text" id="cidade" readonly>
+                <input type="text" id="estado" readonly>
+                </div>
+            </div>
+
+            <!-- VALOR DOS PRODUTOS (MEIO) -->
+            <div class="cart-subtotal">
+                <p>Valor dos produtos: R$
+                    <span id="subtotalValor">
+                    <?php 
+                        $sum = 0;
+                        foreach($carrinho as $item) {
+                            $sum += $item['quantidade'] * $item['preco'];
+                        } 
+                        echo number_format($sum,2 ,',', '.');
+                    ?>
+                    </span>
+                </p>
+            </div>
+
+            <!-- TOTAL FINAL (DIREITA) -->
+            <div class="cart-total">
+                <p>Total Final: R$ <span id="totalFinal"><?= number_format($sum, 2, ',', '.') ?></span></p>
+            </div>
+        </div>
+
+        <div class="cart-finish">
+            <a href="#" class="btn-cart-finish">Finalizar Compra</a>
+        </div>
+    <?php endif; ?>
+
+    <script src="<?= BASE_URL ?>/scripts/utils.js"></script>
+</div>
 </body>
 </html>
