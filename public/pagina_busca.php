@@ -68,32 +68,34 @@ if($termo === '') {
             </div>
         </section>
     </header>
-
+    
     <h1>Resultados da busca por <?= htmlspecialchars($termo) ?></h1>
-
-    <a href="pagina_inicial.php">Voltar</a>
 
     <hr>
 
-    <?php if(empty($produtos)): ?>
-        <p>Nenhum produto encontrado.</p>
-    <?php else: ?>
-        <p>Total encontrado: <?= count($produtos) ?></p>
-        <ul>
-            <?php foreach ($produtos as $p): ?>
-                <li>
+   <?php if(empty($produtos)): ?>
+    <p>Nenhum produto encontrado.</p>
+<?php else: ?>
+    <p style="text-align:center;">Total encontrado: <?= count($produtos) ?></p>
+
+    <div class="search-results">
+        <?php foreach ($produtos as $p): ?>
+            <article class="product-card">
+                <div class="product-image">
+                    <?php if (!empty($p['imagem_url'])): ?>
+                        <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="Imagem do produto">
+                    <?php endif; ?>
+                </div>
+
+                <div class="product-info">
                     <strong><?= htmlspecialchars($p['nome'])?></strong><br>
                     Categoria: <?= htmlspecialchars($p['categoria'])?> <br>
                     Preço: R$ <?= number_format($p['preco'], 2, ',', '.') ?> <br>
-
-                    <?php if (!empty($p['imagem_url'])): ?>
-                        <img src="<?= htmlspecialchars($p['imagem_url']) ?>" width="150" alt="Imagem do produto">
-                    <?php endif; ?>
-
                     <p><?= nl2br(htmlspecialchars($p['descricao'])) ?></p>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
+                </div>
+            </article>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
 </body>
 </html>

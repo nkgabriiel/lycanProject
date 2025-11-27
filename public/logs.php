@@ -71,7 +71,7 @@ try {
             </div>
         </section>
     </header>
-
+    <div class="tela-logs">
     <h1>Logs de auditoria</h1>
     <p>Histórico das últimas 100 ações do sistema</p>
 
@@ -80,13 +80,15 @@ try {
     <?php if(isset($erro_bd)): ?>
         <?= $erro_bd ?>
     <?php endif; ?>
-
+    <div class="logs-table-container">
     <table>
         <thead>
-            <tr>Data/hora</tr>
-            <tr>Usuário</tr>
-            <tr>Ação</tr>
-            <tr>Detalhes</tr>
+            <tr>
+                <th>Data/hora</th>
+                <th>Usuário</th>
+                <th>Ação</th>
+                <th>Detalhes</th>
+            </tr>
         </thead>
         <tbody>
             <?php if (empty($logs)): ?>
@@ -127,5 +129,7 @@ try {
                     <?php endif; ?>
         </tbody>
     </table>
+    </div>
+    </div>
 </body>
 </html>

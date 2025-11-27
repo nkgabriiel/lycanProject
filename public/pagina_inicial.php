@@ -6,16 +6,12 @@ require_once __DIR__ . '/../app/config.php';
 $pdo = conectar_banco();
 
 $sql = 'SELECT p.*, c.nome AS categoria_nome FROM produtos p LEFT JOIN categorias c ON  p.categoria_id = c.id WHERE p.estoque > 0 ORDER BY p.data_lancamento DESC LIMIT 3';
-
 $stmt = $pdo->query($sql);
 $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $sql_vendas = 'SELECT p.*, c.nome AS categoria_nome FROM produtos p LEFT JOIN categorias c ON p.categoria_id = c.id WHERE p.estoque > 0 ORDER BY p.vendas DESC LIMIT 3';
-
 $stmt = $pdo->query($sql_vendas);
 $mais_vendidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
 
 $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUOTES, 'UTF-8');
 ?>
@@ -50,11 +46,11 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
             <!-- ================= ICONS / PROFILE ================= -->
             <div class="icons">
 
-            <div id="box_busca">
-                <form method="GET" action="pagina_busca.php">
-                    <input type="text" id="campo_busca" name="busca" placeholder="Pesquisar...">
-                </form>
-            </div>
+                <div id="box_busca">
+                    <form method="GET" action="pagina_busca.php">
+                        <input type="text" id="campo_busca" name="busca" placeholder="Pesquisar...">
+                    </form>
+                </div>
 
                 <a href="pagina_busca.php">
                     <img width="35" height="35" class="search" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
@@ -68,15 +64,13 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                     <img width="35" height="35" alt="Perfil" class="profile-icon" id="profileIcon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png" alt="user-male-circle"/>
 
                     <div class="profile-dropdown" id="profileMenu" role="menu" aria-labelledby="profiletoggle">
-                    <?php if (!isset($_SESSION['usuario_id'])): ?>
-                    
-                        <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
-                        <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
-
-                    <?php else: ?>
-                        <a href="<?= BASE_URL ?>/public/meu_perfil.php" class="profile-item">Meu Perfil</a>
-                        <a href="../app/logout.php" class="profile-item">Sair</a>
-                    <?php endif; ?>
+                        <?php if (!isset($_SESSION['usuario_id'])): ?>
+                            <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
+                            <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
+                        <?php else: ?>
+                            <a href="<?= BASE_URL ?>/public/meu_perfil.php" class="profile-item">Meu Perfil</a>
+                            <a href="../app/logout.php" class="profile-item">Sair</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -93,31 +87,44 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
         </section>
     </div>
 
-    <!-- ================= HOMEPAGE CONTENT ================= -->
+    <!-- ================= Lançamentos ================= -->
     <section class="homepage-content" id="homepage-content">
         <h2 class="title">Lançamentos</h2>
 
         <div class="box-content">
             <?php foreach ($produtos as $p): ?>
-
                 <div class="box">
                     <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
-                    <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="item" ">
+                        <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="item">
                     </a>
-                    <div class="title-stars">
-                        <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
-                        <h3><?= htmlspecialchars($p['nome']) ?></h3>
-                        </a>
-                        <div class="stars">
-                            <h2>Avaliações</h2>
-                            ⭐⭐⭐⭐⭐
+
+                    <div class="info-area">
+                        <!-- Linha de cima: nome + avaliações à direita -->
+                        <div class="title-stars">
+                            <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
+                                <h3><?= htmlspecialchars($p['nome']) ?></h3>
+                            </a>
+
+                            <div class="stars">
+                                <span class="label-avaliacoes">Avaliações</span>
+                                <span class="stars-icons">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+
+                        <!-- Linha de baixo: preço + botão -->
+                        <div class="price-row">
+                            <div class="price">
+                                <span class="current-price">
+                                    R$ <?= number_format($p['preco'], 2, ',', '.') ?>
+                                </span>
+                                <span class="old-price">R$ 149,99</span>
+                            </div>
+
+                            <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $p['id'] ?>" class="btn-buy">
+                                Adicionar ao carrinho
+                            </a>
                         </div>
                     </div>
-                    <div class="price">
-                        R$ <?= number_format($p['preco'], 2, ',', '.') ?>
-                        <span class="through">R$ 149,99</span>
-                    </div>
-                    <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $p['id'] ?>" class="bth-homepage">Adicione ao carrinho</a>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -125,33 +132,46 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
 
     <hr>
 
+    <!-- ================= Mais Vendidas ================= -->
     <section class="homepage-content" id="homepage-content">
         <h2 class="title">Mais Vendidas</h2>
         <div class="box-content">
             <?php foreach ($mais_vendidos as $p): ?>
                 <div class="box">
                     <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
-                    <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="item">
-                    </a>    
+                        <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="item">
+                    </a>
+
+                    <div class="info-area">
                         <div class="title-stars">
                             <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
-                            <h3><?= htmlspecialchars($p['nome']) ?></h3>
+                                <h3><?= htmlspecialchars($p['nome']) ?></h3>
                             </a>
+
                             <div class="stars">
-                                <h2>Avaliações</h2>
-                                ⭐⭐⭐⭐⭐
+                                <span class="label-avaliacoes">Avaliações</span>
+                                <span class="stars-icons">⭐⭐⭐⭐⭐</span>
                             </div>
                         </div>
-                        <div class="price">
-                            R$ <?= number_format($p['preco'], 2, ',', '.') ?>
-                            <span class="through">R$ 149,99</span>
+
+                        <div class="price-row">
+                            <div class="price">
+                                <span class="current-price">
+                                    R$ <?= number_format($p['preco'], 2, ',', '.') ?>
+                                </span>
+                                <span class="old-price">R$ 149,99</span>
+                            </div>
+
+                            <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $p['id'] ?>" class="btn-buy">
+                                Adicionar ao carrinho
+                            </a>
                         </div>
-                        <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $p['id'] ?>" class="bth-homepage">Adicione ao carrinho</a>
+                    </div>
                 </div>
             <?php endforeach; ?>    
         </div>
     </section>
-<script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>
 
+    <script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>
 </body>
 </html>

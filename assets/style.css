@@ -21,9 +21,9 @@
 
 /* ================= BODY ================= */
 body {
-    background-color: var(--bg);
     margin-top: var(--header-height);
     overflow-x: hidden;
+    background: white;
 }
 
 /* ================= GENERIC SECTION ================= */
@@ -265,42 +265,110 @@ section {
 
 .box-content {
     display: grid;
-    grid-template-columns: repeat(3, 2fr);
-    gap: 1rem;
-    padding: 2rem;
-    padding-left: 0.2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem 1rem;
 }
 
+/* CARD */
 .box {
-    background: linear-gradient(#3963d4, var(--main-color));
-    padding: 3rem;
+    background: none;
+    padding: 0;
     border-radius: 1rem;
-    text-align: left;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    margin: 0 1.5rem;
-    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
 }
 
-.box img {
+.box > a img {
     width: 100%;
-    height: auto;
-    border-radius: 0.6rem;
+    height: 630px;
+    display: block;
+    object-fit: fill;
+}
+
+.box .info-area {
+    background: linear-gradient(#3963d4, var(--main-color));
+    padding: 2.2rem 2.4rem;
+    color: white;
+}
+
+.title-stars {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+    margin-bottom: 1.6rem;
 }
 
 .box h3 {
     color: white;
-    font-size: 2rem;
-    padding: 1rem;
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.box .stars {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.35rem;
+    text-align: right;
+}
+
+.label-avaliacoes {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #f4f4f4;
+}
+
+.stars-icons {
+    font-size: 1.6rem;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
 }
 
 .price {
-    color: white;
-    font-size: 1.5rem;
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 }
 
-.through {
+.current-price {
+    color: #ffffff;
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+.old-price {
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.6);
     text-decoration: line-through;
+}
+
+.btn-buy {
+    padding: 0.8rem 1.8rem;
+    border-radius: 999px;
+    border: 2px solid #ffffff;
+    background: transparent;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: 0.15s ease;
+}
+
+.btn-buy:hover {
+    background: #ffffff;
+    color: var(--main-color);
+    transform: translateY(-2px);
 }
 
 .btn-homepage {
@@ -317,52 +385,6 @@ section {
 .btn-homepage:hover {
     transform: translateY(-3px) scale(1.06);
 }
-
-/* ================= PRODUCT STARS ================= */
-.stars {
-    display: grid;
-    gap: 0.5rem 0.3rem;
-    grid-template-columns: repeat(5, auto);
-    grid-auto-rows: auto;
-    position: static !important;
-    margin: 0;
-    padding: 0;
-    align-items: center;
-}
-
-.title-stars {
-    display: flex;
-    align-items: flex-start;
-    gap: 7rem;
-}
-
-.stars h2 {
-    grid-column: 1 / -1;
-    margin: 0;
-    padding: 0;
-    font-size: 2rem;
-    color: white;
-    font-weight: bold;
-    display: block;
-    margin-top: 10px;
-    margin-right: 30px;
-}
-
-.stars img {
-    width: 22px;
-    height: auto;
-    display: block;
-    grid-row: 2;
-
-    filter:
-        invert(55%)
-        sepia(64%)
-        saturate(748%)
-        hue-rotate(199deg)
-        brightness(94%)
-        contrast(88%);
-}
-
 /* ================= LOGIN PAGE ================= */
 body.page-login {
     background: linear-gradient(white, var(--main-color));
@@ -633,6 +655,30 @@ body.dashboard-page .btn-add {
     border-radius: 4px;
     overflow: hidden;
     -webkit-border-radius: 8px;
+}
+
+.btn-dashbox {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+body.dashboard-page .btn-auditrecord,
+body.dashboard-page .btn-manageproduct {
+    text-decoration: none;
+    padding: 10px 20px;
+    background: #ffffff22;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+body.dashboard-page .btn-auditrecord:hover,
+body.dashboard-page .btn-manageproduct:hover {
+    background: #ffffff44;
 }
 
 body.dashboard-page .btn-cancel {
@@ -1353,7 +1399,6 @@ body.singUp-page .tela-cadastro .login-text .btn-login:hover {
 
 /* ================= CART PAGE, PRODUCT PAGES, SEARCH PAGE ================= */
 body.logs-page,
-body.search-page,
 body.productform-page,
 body.product-page,
 body.tableproduct-page,
@@ -1367,16 +1412,32 @@ body.cart-page {
     overflow: hidden;
 }
 
+body.search-page {
+    background: white;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.listproduct-container {
+    flex: 1;
+    margin-top: 15px;
+    overflow-y: auto;
+}
+
 body.productform-page .tela-adicionarproduto,
 body.tableproduct-page .tela-tabelaproduto {
     position: fixed;
     top: 20%;
-    left: 15%;
+    left: 35%;
     transform: (-50%, -50%);
-    width: 1360px;
+    width: 700px;
     height: 570px;
     padding: 0;
-    display: block;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     box-sizing: border-box;
     border-radius: 30px;
@@ -1385,6 +1446,7 @@ body.tableproduct-page .tela-tabelaproduto {
     background: linear-gradient(var(--main-color), #3963d4);
     box-shadow: 0 16px 40px rgba(0,0,0,0.35);
     backdrop-filter: blur(6px);
+    overflow: hidden;
 }
 
 body.productform-page h1,
@@ -1393,6 +1455,17 @@ body.tableproduct-page h2 {
     font-weight: 700;
     font-size: 2rem;
     color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+    width: 70%;
+}
+
+body.search-page h1 {
+    padding: 1rem 0 2rem 0;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: var(--main-color);
     text-align: center;
     margin: 0 auto;
     margin-top: 0.5rem;
@@ -1463,6 +1536,7 @@ body.productform-page .btn-registerproduct:hover,
 body.tableproduct-page .btn-addproduct:hover {
     background-color: green;
     color: white;
+    cursor: pointer;
 }
 
 .btn-delete {
@@ -1592,3 +1666,150 @@ body.productform-page select option {
     padding: 10px;
     font-size: 1.4rem;
 }
+
+body.search-page h1 {
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 20px;
+    color: var(--main-color);
+}
+
+body.search-page > p {
+    text-align: center;
+    color: var(--main-color);
+    font-size: 1.2rem;
+}
+
+.search-results {
+    max-width: 1200px;
+    margin: 40px auto 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+
+.product-card {
+    flex: 0 0 calc(25% - 30px);
+    background: #1a2857aa;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-image {
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.product-info {
+    padding: 12px 16px 18px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.product-info p {
+    margin-top: 6px;
+    font-size: 11px;
+}
+
+.product-info h2 {
+    font-size: 1.1rem;
+    margin: 0 0 8px;
+}
+
+.product-description {
+    font-size: 0.8rem;
+    margin-top: 6px;
+}
+
+.search-results ul,
+.search-results li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ================= LOGS ================= */
+body.logs-page .tela-logs {
+    position: fixed;
+    top: 17%;
+    left: 15%;
+    width: 1360px;
+    height: 700px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 30px;
+    color: white;
+    z-index: 50;
+    background: linear-gradient(var(--main-color), #3963d4);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+    overflow: hidden;
+}
+
+.logs-table-container {
+    flex: 1;
+    margin-top: 15px;
+    overflow-y: auto;
+}
+
+.tela-logs table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+body.logs-page h1 {
+    padding: 1rem 0 2rem 0;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+    width: 70%;
+}
+
+.tela-logs p {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.tela-logs > a {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    color: red;
+}
+
+.tela-logs > a:hover {
+   text-decoration: underline;
+}
+
+
+.logs-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.logs-table-container th,
+.logs-table-container td {
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 1.3rem;
+}
+

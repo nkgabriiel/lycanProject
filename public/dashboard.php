@@ -125,7 +125,10 @@ if($_SESSION['perfil'] === 'admin') {
                 </tbody>
             </table>
         <?php endif ?>
+        <div class="btn-dashbox">
+        <a href="<?= BASE_URL ?>/public/produto_listar.php" class="btn-manageproduct">Gerir Produtos</a>
+        <a href="<?= BASE_URL ?>/public/logs.php" class="btn-auditrecord">Registros de Auditoria</a>
         </div>
-
-        <a href="<?= BASE_URL ?>/public/produto_listar.php">Gerir Produtos</a>
-        <a href="<?= BASE_URL ?>/public/logs.php">Registros de Auditoria</a>
+        </div>
+        </body>
+</html>

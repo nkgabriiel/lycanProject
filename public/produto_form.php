@@ -87,13 +87,6 @@ $categorias = $stmt_cat->fetchAll();
     <div class="tela-adicionarproduto">
     <h1><?= $edicao ? 'Editar Produto' : 'Adicionar Produto' ?></h1>
 
-    <div class="btn-productform">
-    <a href="<?= BASE_URL ?>/public/dashboard.php" class="btn-backtotable">Voltar</a>
-    <button type="submit" class="btn-registerproduct">
-                    <?= $edicao ? "Atualizar Produto" : "Cadastrar Produto" ?>
-                </button>
-                </div>
-
     <?php if (!empty($_SESSION['flash_erro'])): ?>
         <div style="color:red;"><?= htmlspecialchars($_SESSION['flash_erro'])?></div>
     <?php unset($_SESSION['flash_erro']);
@@ -150,10 +143,14 @@ $categorias = $stmt_cat->fetchAll();
             </div>
         </div>
     </div>
+
+    <div class="btn-productform">
+        <a href="<?= BASE_URL ?>/public/dashboard.php" class="btn-backtotable">Voltar</a>
+        <button type="submit" class="btn-registerproduct">
+            <?= $edicao ? "Atualizar Produto" : "Cadastrar Produto" ?>
+        </button>
+    </div>
 </form>
-
-
-        </form>
         </div>
 </body>
 </html>

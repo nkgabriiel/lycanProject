@@ -72,6 +72,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <br><br>
         <a href="<?= BASE_URL ?>/public/produto_form.php" class="btn-addproduct">Adicionar Novo Produto</a>
         </div>
+        <div class="listproduct-container">
         <table border="1" cellpadding="5" cellspacing="0">
     <thead>
         <tr>
@@ -116,6 +117,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endforeach; ?>
     </tbody>
 </table>
+</div>
 </div>
 
 </body>
