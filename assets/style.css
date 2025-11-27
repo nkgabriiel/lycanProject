@@ -1813,3 +1813,38 @@ body.logs-page h1 {
     font-size: 1.3rem;
 }
 
+
+/* Wrapper que contém o ícone + dropdown */
+#profileWrap {
+    position: relative;
+    display: inline-block;
+}
+
+/* O menu dropdown */
+#profileMenu {
+    position: absolute;
+    top: 45px; /* abaixo do ícone */
+    right: 0;
+    display: none; /* escondido por padrão */
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px 0;
+    min-width: 140px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+/* Itens do menu */
+#profileMenu .profile-item {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* Hover dos itens */
+#profileMenu .profile-item:hover {
+    background: #f3f3f3;
+}

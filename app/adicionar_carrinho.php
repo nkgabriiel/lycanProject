@@ -10,7 +10,7 @@ require_once __DIR__ . '/config.php';
  $pdo = conectar_banco();
 
  $stmt = $pdo->prepare('SELECT * FROM produtos WHERE id = ?');
- $stmt->execute(['id']);
+ $stmt->execute([$id]);
  $produto = $stmt->fetch(PDO::FETCH_ASSOC);
 
  if(!$produto) {
@@ -30,6 +30,7 @@ if(!isset($_SESSION['carrinho'])) {
         'nome' => $produto['nome'],
         'quantidade' => 1,
         'preco' => $produto['preco'],
+        'imagem_url' => $produto['imagem_url']
     ];
  } 
  
