@@ -35,7 +35,6 @@ $stmt = $pdo->prepare('INSERT INTO usuarios (nome, email, senha_hash, perfil) VA
 
 if ($stmt->execute([$nome, $email, $senha_hash, $perfil])) {
     registrarLog('Criar Usuário', 'Criou o usuário: ' . $email . '('. $perfil .')');
-    $_SESSION['flash_sucesso'] = 'Usuário criado com sucesso!';
 } else {
     $_SESSION['flash_erro'] = 'Falha ao criar usuário.';
 }

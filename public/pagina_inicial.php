@@ -26,7 +26,6 @@ $mais_vendidos = $mais_vendidos['data'];
 
 $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUOTES, 'UTF-8');
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
