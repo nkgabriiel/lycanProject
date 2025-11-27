@@ -80,7 +80,7 @@ $produto = $produto['data'];
     <!-- WRAPPER GERAL -->
     <div class="product-wrapper">
 
-        <!-- ============ GALERIA (thumbs + imagem grande) ============ -->
+        <!-- ============ GALERIA ============ -->
         <div class="product-gallery">
 
             <!-- Thumbs à esquerda -->
