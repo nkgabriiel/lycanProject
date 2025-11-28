@@ -79,6 +79,7 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                             <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
                         <?php else: ?>
                             <a href="<?= BASE_URL ?>/public/meu_perfil.php" class="profile-item">Meu Perfil</a>
+                            <a href="<?= BASE_URL ?>/public/dashboard.php" class="profile-item">Dashboard</a>
                             <a href="../app/logout.php" class="profile-item">Sair</a>
                         <?php endif; ?>
                     </div>
