@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/core/config.php';
 
 $carrinho = $_SESSION['carrinho'] ?? [];
 ?>
@@ -80,9 +80,9 @@ $carrinho = $_SESSION['carrinho'] ?? [];
             <td><?= number_format($item['preco'], 2, ',', '.') ?></td>
             <td>R$ <?= number_format($item['quantidade'] * $item['preco'], 2, ',', '.') ?></td>
             <td>
-                <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $item['id'] ?>">+</a>
-                <a href="<?= BASE_URL ?>/app/remover_carrinho.php?id=<?= $item['id'] ?>">-</a>
-                <a href="<?= BASE_URL ?>/app/deletar_carrinho.php?id=<?= $item['id'] ?>">Remover</a>
+                <a href="<?= BASE_URL ?>/app/controller/adicionar_carrinho.php?id=<?= $item['id'] ?>">+</a>
+                <a href="<?= BASE_URL ?>/app/controller/remover_carrinho.php?id=<?= $item['id'] ?>">-</a>
+                <a href="<?= BASE_URL ?>/app/controller/deletar_carrinho.php?id=<?= $item['id'] ?>">Remover</a>
             </td>
         </tr>
         <?php endforeach; ?>

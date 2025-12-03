@@ -1,7 +1,7 @@
 <?php
 $perfil_exigido = 'admin';
-require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/verifica_sessao.php';
+require_once __DIR__ . '/../core/config.php';
+require_once __DIR__ . '/../core/verifica_sessao.php';
 
 if($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['usuario_id'])) {
     redirecionar('/public/dashboard.php');

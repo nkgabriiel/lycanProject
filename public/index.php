@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/core/config.php';
 
 $erro = $_SESSION['flash_erro'] ?? '';
 $sucesso = $_SESSION['flash_sucesso'] ?? '';
@@ -67,7 +67,7 @@ unset($_SESSION['flash_erro'], $_SESSION['flash_sucesso']);
             <div class="correct-login"><?= htmlspecialchars($sucesso)?></div>
         <?php endif; ?>
 
-        <form action="../app/autentica.php" method="post" autocomplete="off">
+        <form action="../app/auth/autentica.php" method="post" autocomplete="off">
             <label for="email">E-mail: </label><br>
             <input type="email" name="email" id="email" required><br><br>
 

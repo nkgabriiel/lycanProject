@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/core/config.php';
 
 ?>
 
@@ -53,7 +53,7 @@ require_once __DIR__ . '/../app/config.php';
     
     <div class="tela-esquecisenha">
     <h2>RECUPERAR SENHA</h2>
-    <form action="../app/enviar_reset.php" method="POST">
+    <form action="../app/auth/enviar_reset.php" method="POST">
         <label for="email">Email: </label>
         <input type="email" name="email" required>
          <div class="btn-changepassword">

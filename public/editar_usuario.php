@@ -1,8 +1,8 @@
 <?php
 $perfil_exigido = 'admin';
 
-require_once __DIR__ . '/../app/config.php';
-require_once __DIR__ . '/../app/verifica_sessao.php';
+require_once __DIR__ . '/../app/core/config.php';
+require_once __DIR__ . '/../app/core/verifica_sessao.php';
 
 $usuario_id = $_GET['id'] ?? 0;
 if(empty($usuario_id)) {
@@ -69,7 +69,7 @@ if(!$usuario) {
 
         <div class="tela-editar">
         <h2>Editar Usuário: <?= htmlspecialchars($usuario['nome'])?></h2>
-        <form action="../app/atualizar_usuario.php" method="POST">
+        <form action="../app/controller/atualizar_usuario.php" method="POST">
 
             <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
 

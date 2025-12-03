@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/core/config.php';
 
 $tokenURL = $_GET['token'] ?? '';
 
@@ -82,7 +82,7 @@ if(!$reset_request) {
         <div style="color:green;"><?= $sucesso ?></div>
     <?php endif; ?>
 
-    <form action="../app/salvar_nova_senha.php" method="POST">
+    <form action="../app/auth/salvar_nova_senha.php" method="POST">
 
     <input type="hidden" name="token" value="<?=htmlspecialchars($tokenURL)?>">
 

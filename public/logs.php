@@ -1,8 +1,8 @@
 <?php
 $perfil_exigido = 'admin';
 
-require_once __DIR__ . '/../app/config.php';
-require_once __DIR__ . '/../app/verifica_sessao.php';
+require_once __DIR__ . '/../app/core/config.php';
+require_once __DIR__ . '/../app/core/verifica_sessao.php';
 
 $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Admin', ENT_QUOTES, 'UTF-8');
 

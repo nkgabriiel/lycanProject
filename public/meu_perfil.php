@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../app/config.php';
-require_once __DIR__ . '/../app/verifica_sessao.php';
+require_once __DIR__ . '/../app/core/config.php';
+require_once __DIR__ . '/../app/core/verifica_sessao.php';
 
 $erro = $_SESSION['flash_erro'] ?? '';
 $sucesso = $_SESSION['flash_sucesso'] ?? '';
@@ -75,7 +75,7 @@ try {
                 <?php if($erro): ?> <div style="color:red; margin-bottom:15px;"><?= $erro?></div><?php endif; ?>
     <?php if($sucesso): ?> <div style="color:green; margin-bottom: 15px;"><?= $sucesso ?> </div><?php endif; ?>
         
-    <form action="<?= BASE_URL ?>/app/atualizar_meu_perfil.php" method="POST">
+    <form action="<?= BASE_URL ?>/app/controller/atualizar_meu_perfil.php" method="POST">
         <h3>Dados Pessoais</h3>
 
         <label for="nome">Nome:</label><br>
@@ -86,7 +86,7 @@ try {
         
         <div class="btns-myprofile">
         <button type="submit" class="btn-save">Salvar Dados</button>
-        <a href="alterar_senha.php" class="btn-alterpassword">Alterar Senha</a> 
+        <a href="alterar_senha.php" class="btn-alterpassword">Alterar Senha</a>  <!-- criar alterar_senha.php -->
         </div>
 
         <div class="btn-back-container">

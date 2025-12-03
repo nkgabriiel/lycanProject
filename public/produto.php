@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/core/config.php';
 
 $pdo =  conectar_banco();
 
@@ -97,7 +97,7 @@ $produto = $produto['data'];
 
     <br><br>
 
-    <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $produto['id'] ?>" class="btn-homepage" style="font-size: 20px; padding=10px 20px;">
+    <a href="<?= BASE_URL ?>/app/controller/adicionar_carrinho.php?id=<?= $produto['id'] ?>" class="btn-homepage" style="font-size: 20px; padding=10px 20px;">
         Adicionar ao carrinho
     </a>
     </div>

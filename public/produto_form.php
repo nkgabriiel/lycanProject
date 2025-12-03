@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../app/config.php';
-require_once __DIR__ . '/../app/verifica_sessao.php';
+require_once __DIR__ . '/../app/core/config.php';
+require_once __DIR__ . '/../app/core/verifica_sessao.php';
 
 if($_SESSION['perfil'] !== 'admin') {
     redirecionar('/public/pagina_inicial.php');
@@ -92,7 +92,7 @@ $categorias = $stmt_cat->fetchAll();
     <?php unset($_SESSION['flash_erro']);
         endif; ?>
 
-        <form action="<?= BASE_URL ?>/app/salvar_produto.php" method="POST" class="produto-form">
+        <form action="<?= BASE_URL ?>/app/controller/salvar_produto.php" method="POST" class="produto-form">
     <?php if ($edicao): ?>
         <input type="hidden" name="id" value="<?= htmlspecialchars($produto['id'])?>">
     <?php endif; ?>

@@ -1,8 +1,8 @@
 <?php
 $perfil_exigido = 'admin';
 
-require_once __DIR__ . '/../app/config.php';
-require_once __DIR__ . '/../app/verifica_sessao.php';
+require_once __DIR__ . '/../app/core/config.php';
+require_once __DIR__ . '/../app/core/verifica_sessao.php';
 
 $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Admin', ENT_QUOTES, 'UTF-8');
 $admin_id_logado = $_SESSION['usuario_id'];
@@ -78,7 +78,7 @@ if($_SESSION['perfil'] === 'admin') {
     <h2>Gerenciamento de usuários</h2>
 
     <div class="btn-dashbody">
-        <a href="../app/logout.php" class="btn-cancel">Sair</a> <hr>
+        <a href="../app/auth/logout.php" class="btn-cancel">Sair</a> <hr>
         <a href="criar_usuario.php" class="btn-add">+ Adicionar Usuário</a>
     </div>
 
@@ -112,7 +112,7 @@ if($_SESSION['perfil'] === 'admin') {
                             <td>
                                 <a href="editar_usuario.php?id=<?= $usuario['id'] ?>", class="btn-editar" >Editar</a>
                                 <?php if($usuario['id'] !== $admin_id_logado): ?>
-                                    <form action="../app/deletar_usuario.php" method="POST" style="display:inline" onsubmit="return confirm('Tem certeza?');"> 
+                                    <form action="../app/controller/deletar_usuario.php" method="POST" style="display:inline" onsubmit="return confirm('Tem certeza?');"> 
                                         <input type="hidden" name="usuario_id" value="<?= $usuario['id']?>">
                                         <button type="submit", class="btn-deletar">
                                         Deletar

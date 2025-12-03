@@ -1,7 +1,7 @@
 <?php
 $perfil_exigido = 'admin';
-require_once __DIR__ . '/../app/config.php';
-require_once __DIR__ . '/../app/verifica_sessao.php';
+require_once __DIR__ . '/../app/core/config.php';
+require_once __DIR__ . '/../app/core/verifica_sessao.php';
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +53,7 @@ require_once __DIR__ . '/../app/verifica_sessao.php';
 
     <div class="tela-adicionar">
     <h2>Adicionar Novo usuário</h2>
-    <form action="../app/salvar_usuario.php" method="POST">
+    <form action="../app/controller/salvar_usuario.php" method="POST">
         <label>Nome:</label><br>
         <input type="text" name="nome" required> <br><br>
 

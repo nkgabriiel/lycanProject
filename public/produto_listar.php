@@ -1,8 +1,8 @@
 <?php 
 $perfil_exigido = 'admin';
 
-require_once __DIR__ . '/../app/config.php';
-require_once __DIR__ . '/../app/verifica_sessao.php';
+require_once __DIR__ . '/../app/core/config.php';
+require_once __DIR__ . '/../app/core/verifica_sessao.php';
 
 $pdo = conectar_banco();
 
@@ -106,7 +106,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     Editar
                 </a>
 
-                <form action="<?= BASE_URL ?>/app/produto_deletar.php"
+                <form action="<?= BASE_URL ?>/app/controller/produto_deletar.php"
                       method="POST" style="display:inline;"
                       onsubmit="return confirm('Deseja excluir este produto?');">
                     <input type="hidden" name="produto_id" value="<?= $p['id'] ?>">

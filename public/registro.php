@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/core/config.php';
 
 if (isset($_SESSION['usuario_id'])) {
    redirecionar('/public/dashboard.php');
