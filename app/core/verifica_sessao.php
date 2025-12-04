@@ -8,7 +8,7 @@ if(empty($_SESSION['usuario_id'])) {
 }
 
 if(isset($perfil_exigido) && $_SESSION['perfil'] !== $perfil_exigido) {
-    redirecionar('/public/sem_permissao.php');
+    redirecionar('/app/core/sem_permissao.php');
     exit;
 }
 ?>
