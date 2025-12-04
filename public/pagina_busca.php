@@ -50,18 +50,25 @@ if($termo === '') {
             <!-- ================= NAVBAR ================= -->
             <nav class="navbar">
                 <a href="pagina_inicial.php">HOME</a>
-                <a href="#male">MASCULINO</a>
-                <a href="#female">FEMININO</a>
-                <a href="#about">CONTATO</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=camisetas">CAMISETAS</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=calcas">CALÇAS</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=acessorios">ACESSÓRIOS</a>
             </nav>
 
             <!-- ================= ICONS / PROFILE ================= -->
             <div class="icons">
-                <a href="#">
-                    <img width="35" height="35" class="search" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
-                </a>
 
-                <a href="#">
+                <div class="search-wrapper">
+                    <form method="GET" action="pagina_busca.php">
+                        <input type="text" id="campo_busca" name="busca" class="search-input" placeholder="Pesquisar...">
+                    </form>
+                </div>
+
+               <button type="button" id="search-toggle" class="search-btn">
+                    <img width="35" height="35" class="search" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
+                </button>
+
+                <a href="carrinho.php">
                     <img width="35" height="35" class="cart" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
                 </a>
 
@@ -99,7 +106,9 @@ if($termo === '') {
             <article class="product-card">
                 <div class="product-image">
                     <?php if (!empty($p['imagem_url'])): ?>
-                        <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="Imagem do produto">
+                        <a href="<?= BASE_URL ?>/public/produto.php?id=<?= $p['id'] ?>">
+                          <img src="<?= htmlspecialchars($p['imagem_url']) ?>" alt="Imagem do produto">
+                        </a>
                     <?php endif; ?>
                 </div>
 

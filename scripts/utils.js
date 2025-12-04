@@ -61,3 +61,24 @@ async function calcularFrete(cidade, estado) {
         document.getElementById("totalFinal").innerText = totalFinal.toFixed(2).replace('.', ',');
     }
 }
+
+ document.querySelectorAll('.product-thumb-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const src = btn.getAttribute('data-image');
+                document.getElementById('main-product-image').src = src;
+
+                document.querySelectorAll('.product-thumb-btn')
+                    .forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+document.getElementById('search-toggle').addEventListener('click', function () {
+    const input = document.getElementById('campo_busca');
+
+    input.classList.toggle('active');
+
+    if(input.classList.contains('active')) {
+        input.focus();
+    }
+});

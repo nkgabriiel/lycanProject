@@ -1456,7 +1456,7 @@ body.passwordreset-page .tela-resetarsenha {
     left: 30%;
     transform: (-50%, -50%);
     width: 700px;
-    height: 400px;
+    height: 500px;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -2265,6 +2265,7 @@ body.product-page {
     background: #ffffff;
     color: var(--main-color);
 }
+
 /* Wrapper que contém o ícone + dropdown */
 #profileWrap {
     position: relative;
@@ -2298,4 +2299,39 @@ body.product-page {
 /* Hover dos itens */
 #profileMenu .profile-item:hover {
     background: #f3f3f3;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 0;
+    opacity: 0;
+    padding: 8px 10px;
+    font-size: 16px;
+    border: 1px solid #1f3266;
+    border-radius: 5px;
+    outline: none;
+    
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.search-input.active {
+    width: 180px;
+    opacity: 1;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.search {
+     width: 30px;
+    height: 30px;
 }

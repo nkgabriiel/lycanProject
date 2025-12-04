@@ -9,7 +9,7 @@ $carrinho = $_SESSION['carrinho'] ?? [];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/style.css">
     <title>Carrinho</title>
 </head>
 <body class="cart-page">
@@ -25,9 +25,9 @@ $carrinho = $_SESSION['carrinho'] ?? [];
             <!-- ================= NAVBAR ================= -->
             <nav class="navbar">
                 <a href="pagina_inicial.php">HOME</a>
-                <a href="#male">MASCULINO</a>
-                <a href="#female">FEMININO</a>
-                <a href="#about">CONTATO</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=camisetas">CAMISETAS</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=calcas">CALÇAS</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=acessorios">ACESSÓRIOS</a>
             </nav>
 
             <!-- ================= ICONS / PROFILE ================= -->
@@ -63,45 +63,14 @@ $carrinho = $_SESSION['carrinho'] ?? [];
 <div class="tela-carrinho">
     <h1>Seu carrinho</h1>
 
-    <a href="<?= BASE_URL ?>/public/pagina_inicial.php">Voltar</a>
-
-<hr>
-
-<?php if (empty($carrinho)): ?>
-    <p>Seu carrinho está vazio</p>
-
-<?php else: ?>
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Preçoo</th>
-            <th>Total</th>
-            <th>Ações</th>
-        </tr>
-        <?php foreach($carrinho as $item): ?>
-        <tr>
-            <td>
-                <img src="<?= htmlspecialchars($item['imagem_url']) ?>" alt="Produto" width="60" style="object-fit: cover; border-radius: 5px">
-            </td>
-            <td><?= htmlspecialchars($item['nome']) ?></td>
-            <td><?= htmlspecialchars($item['quantidade']) ?></td>
-            <td><?= number_format($item['preco'], 2, ',', '.') ?></td>
-            <td>R$ <?= number_format($item['quantidade'] * $item['preco'], 2, ',', '.') ?></td>
-            <td>
-                <a href="<?= BASE_URL ?>/app/controller/adicionar_carrinho.php?id=<?= $item['id'] ?>">+</a>
-                <a href="<?= BASE_URL ?>/app/controller/remover_carrinho.php?id=<?= $item['id'] ?>">-</a>
-                <a href="<?= BASE_URL ?>/app/controller/deletar_carrinho.php?id=<?= $item['id'] ?>">Remover</a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
-    <hr>
 
     <?php if (empty($carrinho)): ?>
         <p>Seu carrinho está vazio</p>
 
     <?php else: ?>
+
+    <hr>
+
         <table border="1" cellpadding="10">
             <tr>
                 <th>Produto</th>
@@ -121,9 +90,9 @@ $carrinho = $_SESSION['carrinho'] ?? [];
                 <td><?= number_format($item['preco'], 2, ',', '.') ?></td>
                 <td>R$ <?= number_format($item['quantidade'] * $item['preco'], 2, ',', '.') ?></td>
                 <td class="cart-actions">
-                    <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $item['id'] ?>" class="btn-cart btn-cart-small">+</a>
-                    <a href="<?= BASE_URL ?>/app/remover_carrinho.php?id=<?= $item['id'] ?>" class="btn-cart btn-cart-small">-</a>
-                    <a href="<?= BASE_URL ?>/app/deletar_carrinho.php?id=<?= $item['id'] ?>" class="btn-cart btn-cart-remove">Remover</a>
+                    <a href="<?= BASE_URL ?>/app/controller/adicionar_carrinho.php?id=<?= $item['id'] ?>" class="btn-cart btn-cart-small">+</a>
+                    <a href="<?= BASE_URL ?>/app/controller/remover_carrinho.php?id=<?= $item['id'] ?>" class="btn-cart btn-cart-small">-</a>
+                    <a href="<?= BASE_URL ?>/app/controller/deletar_carrinho.php?id=<?= $item['id'] ?>" class="btn-cart btn-cart-remove">Remover</a>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -174,6 +143,7 @@ $carrinho = $_SESSION['carrinho'] ?? [];
             <a href="#" class="btn-cart-finish">Finalizar Compra</a>
         </div>
     <?php endif; ?>
+    <a href="<?= BASE_URL ?>/public/pagina_inicial.php">Voltar</a>
 
     <script src="<?= BASE_URL ?>/scripts/utils.js"></script>
 </div>

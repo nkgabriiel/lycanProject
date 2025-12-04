@@ -41,11 +41,11 @@ try {
             </a>
 
             <!-- ================= NAVBAR ================= -->
-            <nav class="navbar">
+             <nav class="navbar">
                 <a href="pagina_inicial.php">HOME</a>
-                <a href="#male">MASCULINO</a>
-                <a href="#female">FEMININO</a>
-                <a href="#about">CONTATO</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=camisetas">CAMISETAS</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=calcas">CALÇAS</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=acessorios">ACESSÓRIOS</a>
             </nav>
 
             <!-- ================= ICONS / PROFILE ================= -->
@@ -84,10 +84,10 @@ try {
     <?php if($sucesso): ?>
         <div style="color:green;"><?= $sucesso ?></div>
     <?php endif; ?>
-
-     <form action="<?= BASE_URL ?>/app/auth/mudar_senha.php" method="POST">
-        <h3>Alterar Senha</h3>
-
+ <div class="tela-trocarsenha tela-resetarsenha">
+        <h1>Alterar Senha</h1>
+      <form action="<?= BASE_URL ?>/app/auth/mudar_senha.php" method="POST">
+        
         <label for="senha_atual">Senha atual (Obrigatório):</label><br>
         <input type="password" name="senha_atual" required><br><br>
 
@@ -97,7 +97,7 @@ try {
         <label for="confirmar_senha">Confirmar senha:</label>
         <input type="password" name="confirmar_senha" required><br><br>
 
-        <button type="submit">Atualizar senha</button>
+        <button type="submit" name="enviar" class="btn-reset">Atualizar Senha</button>
     </form>
 
     <script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>

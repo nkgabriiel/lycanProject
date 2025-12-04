@@ -40,11 +40,11 @@ $produto = $produto['data'];
             </a>
 
             <!-- ================= NAVBAR ================= -->
-            <nav class="navbar">
+             <nav class="navbar">
                 <a href="pagina_inicial.php">HOME</a>
-                <a href="#male">MASCULINO</a>
-                <a href="#female">FEMININO</a>
-                <a href="#about">CONTATO</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=camisetas">CAMISETAS</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=calcas">CALÇAS</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=acessorios">ACESSÓRIOS</a>
             </nav>
 
             <!-- ================= ICONS / PROFILE ================= -->
@@ -149,7 +149,7 @@ $produto = $produto['data'];
 
             <!-- Botões -->
             <div class="product-actions">
-                <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $produto['id'] ?>"
+                <a href="<?= BASE_URL ?>/app/controller/adicionar_carrinho.php?id=<?= $produto['id'] ?>"
                    class="btn-product-primary">
                     Adicionar ao carrinho
                 </a>
@@ -162,41 +162,7 @@ $produto = $produto['data'];
         </aside>
     </div>
 
-    <script>
-        document.querySelectorAll('.product-thumb-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const src = btn.getAttribute('data-image');
-                document.getElementById('main-product-image').src = src;
-
-                document.querySelectorAll('.product-thumb-btn')
-                    .forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-            });
-        });
-    </script>
-        <p>Categoria: <?= htmlspecialchars($produto['categoria_nome']) ?></p>
-
-        <p><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
-    </div>
-
-    <label for="tamanho">Tamanho:</label>
-    <select id="tamanho" name="tamanho">
-        <option value="">Selecione</option>
-        <option>P</option>
-        <option>M</option>
-        <option>G</option>
-        <option>GG</option>
-    </select>
-
-    <br><br>
-
-    <a href="<?= BASE_URL ?>/app/controller/adicionar_carrinho.php?id=<?= $produto['id'] ?>" class="btn-homepage" style="font-size: 20px; padding=10px 20px;">
-        Adicionar ao carrinho
-    </a>
-    </div>
-</div>
-<br><br>
-<a href="<?= BASE_URL ?>/public/pagina_inicial.php">Voltar</a>
+   
 <script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>
 </body>
 </html>

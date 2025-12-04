@@ -49,9 +49,9 @@ if(!$reset_request) {
             <!-- ================= NAVBAR ================= -->
             <nav class="navbar">
                 <a href="pagina_inicial.php">HOME</a>
-                <a href="#male">MASCULINO</a>
-                <a href="#female">FEMININO</a>
-                <a href="#about">CONTATO</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=camisetas">CAMISETAS</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=calcas">CALÇAS</a>
+                <a href="<?= BASE_URL ?>/public/pagina_busca.php?busca=acessorios">ACESSÓRIOS</a>
             </nav>
 
             <!-- ================= ICONS / PROFILE ================= -->
