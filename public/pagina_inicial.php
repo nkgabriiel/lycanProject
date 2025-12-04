@@ -66,7 +66,7 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                     <img width="35" height="35" class="search" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
                 </a>
 
-                <a href="#">
+                <a href="carrinho.php">
                     <img width="35" height="35" class="cart" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
                 </a>
 
@@ -79,7 +79,9 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                             <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
                         <?php else: ?>
                             <a href="<?= BASE_URL ?>/public/meu_perfil.php" class="profile-item">Meu Perfil</a>
+                            <?php if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'admin'): ?>
                             <a href="<?= BASE_URL ?>/public/dashboard.php" class="profile-item">Dashboard</a>
+                            <?php endif; ?>
                             <a href="../app/auth/logout.php" class="profile-item">Sair</a>
                         <?php endif; ?>
                     </div>

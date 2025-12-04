@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../app/core/config.php';
 require_once __DIR__ . '/../app/core/verifica_sessao.php';
 
+
 $erro = $_SESSION['flash_erro'] ?? '';
 $sucesso = $_SESSION['flash_sucesso'] ?? '';
 unset($_SESSION['flash_erro'], $_SESSION['flash_sucesso']);
@@ -18,19 +19,20 @@ try {
 } catch (PDOException $e) {
     die('Erro ao carregar perfil.');
 }
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trocar Senha</title>
     <link rel="stylesheet" href="../assets/style.css">
-    <title>Meu Perfil</title>
 </head>
-<body class="myprofile-page">
+<body class="passwordreset-page">
 
-<!-- ================= HEADER ================= -->
+ <!-- ================= HEADER ================= -->
     <header class="header">
         <section>
             <!-- ================= LOGO ================= -->
@@ -76,37 +78,28 @@ try {
         </section>
     </header>
 
-    <div class="tela-meuperfil">
+<?php if($erro): ?>
+        <div style="color:red;"><?= $erro ?></div>
+    <?php endif; ?>
+    <?php if($sucesso): ?>
+        <div style="color:green;"><?= $sucesso ?></div>
+    <?php endif; ?>
 
-        <h2>Meu Perfil</h2>
+     <form action="<?= BASE_URL ?>/app/auth/mudar_senha.php" method="POST">
+        <h3>Alterar Senha</h3>
 
-                <?php if($erro): ?> <div style="color:red; margin-bottom:15px;"><?= $erro?></div><?php endif; ?>
-    <?php if($sucesso): ?> <div style="color:green; margin-bottom: 15px;"><?= $sucesso ?> </div><?php endif; ?>
-        
-    <form action="<?= BASE_URL ?>/app/controller/atualizar_meu_perfil.php" method="POST">
-        <h3>Dados Pessoais</h3>
+        <label for="senha_atual">Senha atual (Obrigatório):</label><br>
+        <input type="password" name="senha_atual" required><br><br>
 
-        <label for="nome">Nome:</label><br>
-        <input type="text" name="nome" value="<?= htmlspecialchars($usuario['nome']) ?>" required><br><br>
-        
-        <label for="email">Email:</label><br>
-        <input type="email" name="email" value="<?= htmlspecialchars($usuario['email']) ?>" required><br><br>
-        
-        <div class="btns-myprofile">
-        <button type="submit" class="btn-save">Salvar Dados</button>
-        <a href="<?= BASE_URL ?>/public/alterar_senha.php" class="btn-alterpassword">Alterar Senha</a>  <!-- criar alterar_senha.php -->
-        </div>
+        <label for="nova_senha">Nova senha:</label>
+        <input type="password" name="nova_senha" required><br><br>
 
-        <div class="btn-back-container">
-        <?php if($_SESSION['perfil'] === 'admin'): ?>
-            <a href='<?= BASE_URL ?>/public/dashboard.php' class="btn-back">Voltar</a>
-            <?php else: ?>
-                <a href='<?= BASE_URL ?>/public/pagina_inicial.php' class="btn-back">Voltar</a>
-                <?php endif; ?>
-                </div>
+        <label for="confirmar_senha">Confirmar senha:</label>
+        <input type="password" name="confirmar_senha" required><br><br>
 
-    </form>  
-</div>
-<script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>
+        <button type="submit">Atualizar senha</button>
+    </form>
+
+    <script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>
 </body>
 </html>
