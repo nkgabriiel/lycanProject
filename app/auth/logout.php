@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/../core/config.php';
 
 if(isset($_SESSION['usuario_id'])) {
     registrarLog('Logout', 'Usuário saiu do sistema');

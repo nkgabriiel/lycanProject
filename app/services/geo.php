@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../core/config.php';
 function getCoordenadas($cidade, $estado) {
     $cidade = urlencode($cidade);
     $estado = urlencode($estado);

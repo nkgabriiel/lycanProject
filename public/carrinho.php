@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/core/config.php';
 
 $carrinho = $_SESSION['carrinho'] ?? [];
 ?>
@@ -40,12 +40,20 @@ $carrinho = $_SESSION['carrinho'] ?? [];
                     <img width="35" height="35" class="cart" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
                 </a>
 
-                <div class="profile-dropdown-wrapper">
-                    <img width="35" height="35" alt="Perfil" class="profile-icon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png"/>
+              <div class="profile-dropdown-wrapper" id="profileWrap">
+                    <img width="35" height="35" alt="Perfil" class="profile-icon" id="profileIcon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png" alt="user-male-circle"/>
 
-                    <div class="profile-dropdown" id="profiledropdown" role="menu" aria-labelledby="profiletoggle">
-                        <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
-                        <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
+                    <div class="profile-dropdown" id="profileMenu" role="menu" aria-labelledby="profiletoggle">
+                        <?php if (!isset($_SESSION['usuario_id'])): ?>
+                            <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
+                            <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
+                        <?php else: ?>
+                            <a href="<?= BASE_URL ?>/public/meu_perfil.php" class="profile-item">Meu Perfil</a>
+                            <?php if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'admin'): ?>
+                            <a href="<?= BASE_URL ?>/public/dashboard.php" class="profile-item">Dashboard</a>
+                            <?php endif; ?>
+                            <a href="../app/auth/logout.php" class="profile-item">Sair</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -57,6 +65,37 @@ $carrinho = $_SESSION['carrinho'] ?? [];
 
     <a href="<?= BASE_URL ?>/public/pagina_inicial.php">Voltar</a>
 
+<hr>
+
+<?php if (empty($carrinho)): ?>
+    <p>Seu carrinho está vazio</p>
+
+<?php else: ?>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preçoo</th>
+            <th>Total</th>
+            <th>Ações</th>
+        </tr>
+        <?php foreach($carrinho as $item): ?>
+        <tr>
+            <td>
+                <img src="<?= htmlspecialchars($item['imagem_url']) ?>" alt="Produto" width="60" style="object-fit: cover; border-radius: 5px">
+            </td>
+            <td><?= htmlspecialchars($item['nome']) ?></td>
+            <td><?= htmlspecialchars($item['quantidade']) ?></td>
+            <td><?= number_format($item['preco'], 2, ',', '.') ?></td>
+            <td>R$ <?= number_format($item['quantidade'] * $item['preco'], 2, ',', '.') ?></td>
+            <td>
+                <a href="<?= BASE_URL ?>/app/controller/adicionar_carrinho.php?id=<?= $item['id'] ?>">+</a>
+                <a href="<?= BASE_URL ?>/app/controller/remover_carrinho.php?id=<?= $item['id'] ?>">-</a>
+                <a href="<?= BASE_URL ?>/app/controller/deletar_carrinho.php?id=<?= $item['id'] ?>">Remover</a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
     <hr>
 
     <?php if (empty($carrinho)): ?>

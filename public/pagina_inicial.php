@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../app/verifica_sessao.php';
-require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/core/verifica_sessao.php';
+require_once __DIR__ . '/../app/core/config.php';
 
 $url = BASE_URL . '/app/api/produtos.php';
 
@@ -66,7 +66,7 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                     <img width="35" height="35" class="search" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"/>
                 </a>
 
-                <a href="#">
+                <a href="carrinho.php">
                     <img width="35" height="35" class="cart" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
                 </a>
 
@@ -79,7 +79,10 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                             <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
                         <?php else: ?>
                             <a href="<?= BASE_URL ?>/public/meu_perfil.php" class="profile-item">Meu Perfil</a>
-                            <a href="../app/logout.php" class="profile-item">Sair</a>
+                            <?php if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'admin'): ?>
+                            <a href="<?= BASE_URL ?>/public/dashboard.php" class="profile-item">Dashboard</a>
+                            <?php endif; ?>
+                            <a href="../app/auth/logout.php" class="profile-item">Sair</a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -130,7 +133,7 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                                 <span class="old-price">R$ 149,99</span>
                             </div>
 
-                            <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $l['id'] ?>" class="btn-buy">
+                            <a href="<?= BASE_URL ?>/app/controller/adicionar_carrinho.php?id=<?= $l['id'] ?>" class="btn-buy">
                                 Adicionar ao carrinho
                             </a>
                         </div>
@@ -172,7 +175,7 @@ $usuario_exib = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuario', ENT_QUO
                                 <span class="old-price">R$ 149,99</span>
                             </div>
 
-                            <a href="<?= BASE_URL ?>/app/adicionar_carrinho.php?id=<?= $v['id'] ?>" class="btn-buy">
+                            <a href="<?= BASE_URL ?>/app/controller/adicionar_carrinho.php?id=<?= $v['id'] ?>" class="btn-buy">
                                 Adicionar ao carrinho
                             </a>
                         </div>

@@ -1,8 +1,8 @@
 <?php
 $perfil_exigido = 'admin';
 
-require_once __DIR__ . '/../app/config.php';
-require_once __DIR__ . '/../app/verifica_sessao.php';
+require_once __DIR__ . '/../app/core/config.php';
+require_once __DIR__ . '/../app/core/verifica_sessao.php';
 
 $usuario_id = $_GET['id'] ?? 0;
 if(empty($usuario_id)) {
@@ -55,12 +55,20 @@ if(!$usuario) {
                     <img width="35" height="35" class="cart" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
                 </a>
 
-                <div class="profile-dropdown-wrapper">
-                    <img width="35" height="35" alt="Perfil" class="profile-icon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png"/>
+                <div class="profile-dropdown-wrapper" id="profileWrap">
+                    <img width="35" height="35" alt="Perfil" class="profile-icon" id="profileIcon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png" alt="user-male-circle"/>
 
-                    <div class="profile-dropdown" id="profiledropdown" role="menu" aria-labelledby="profiletoggle">
-                        <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
-                        <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
+                    <div class="profile-dropdown" id="profileMenu" role="menu" aria-labelledby="profiletoggle">
+                        <?php if (!isset($_SESSION['usuario_id'])): ?>
+                            <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
+                            <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
+                        <?php else: ?>
+                            <a href="<?= BASE_URL ?>/public/meu_perfil.php" class="profile-item">Meu Perfil</a>
+                            <?php if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'admin'): ?>
+                            <a href="<?= BASE_URL ?>/public/dashboard.php" class="profile-item">Dashboard</a>
+                            <?php endif; ?>
+                            <a href="../app/auth/logout.php" class="profile-item">Sair</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -69,7 +77,7 @@ if(!$usuario) {
 
         <div class="tela-editar">
         <h2>Editar Usuário: <?= htmlspecialchars($usuario['nome'])?></h2>
-        <form action="../app/atualizar_usuario.php" method="POST">
+        <form action="../app/controller/atualizar_usuario.php" method="POST">
 
             <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
 
@@ -92,5 +100,6 @@ if(!$usuario) {
 
             </div>
         </form>
+        <script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>
     </body>
 </html>

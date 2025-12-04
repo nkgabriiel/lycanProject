@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/core/config.php';
 
 $tokenURL = $_GET['token'] ?? '';
 
@@ -64,12 +64,20 @@ if(!$reset_request) {
                     <img width="35" height="35" class="cart" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
                 </a>
 
-                <div class="profile-dropdown-wrapper">
-                    <img width="35" height="35" alt="Perfil" class="profile-icon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png"/>
+                <div class="profile-dropdown-wrapper" id="profileWrap">
+                    <img width="35" height="35" alt="Perfil" class="profile-icon" id="profileIcon" src="https://img.icons8.com/ios-glyphs/30/user-male-circle.png" alt="user-male-circle"/>
 
-                    <div class="profile-dropdown" id="profiledropdown" role="menu" aria-labelledby="profiletoggle">
-                        <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
-                        <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
+                    <div class="profile-dropdown" id="profileMenu" role="menu" aria-labelledby="profiletoggle">
+                        <?php if (!isset($_SESSION['usuario_id'])): ?>
+                            <a href="index.php" class="profile-item" role="menuitem">Entrar</a>
+                            <a href="registro.php" class="profile-item" role="menuitem">Cadastrar</a>
+                        <?php else: ?>
+                            <a href="<?= BASE_URL ?>/public/meu_perfil.php" class="profile-item">Meu Perfil</a>
+                            <?php if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'admin'): ?>
+                            <a href="<?= BASE_URL ?>/public/dashboard.php" class="profile-item">Dashboard</a>
+                            <?php endif; ?>
+                            <a href="../app/auth/logout.php" class="profile-item">Sair</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -84,7 +92,7 @@ if(!$reset_request) {
     <?php endif; ?>
     <div class="tela-resetarsenha">
         <h1>Altere Sua Senha</h1>
-    <form action="../app/salvar_nova_senha.php" method="POST">
+    <form action="../app/auth/salvar_nova_senha.php" method="POST">
 
     <input type="hidden" name="token" value="<?=htmlspecialchars($tokenURL)?>">
 
@@ -96,6 +104,6 @@ if(!$reset_request) {
 
         <button type="submit" name="enviar" class="btn-reset">Enviar</button>
     </form>
-    </div>
+    <script src="<?= BASE_URL ?>/scripts/utils.js" defer></script>
 </body>
 </html>

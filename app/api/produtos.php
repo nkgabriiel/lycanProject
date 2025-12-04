@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../core/config.php';
 
 header('Content-Type: application/json');
 
@@ -31,6 +31,27 @@ if(!$produto) {
 response('ok', $produto);
 }
 
+//Busca por descrição/nome/categoria
+if(isset($_GET['busca'])) {
+
+    $busca = normalize($_GET['busca'] ?? '');
+    $busca = strtolower($busca);
+
+    $sql = 'SELECT p.*, c.nome AS categoria FROM produtos p LEFT JOIN categorias c ON p.categoria_id = c.id 
+    WHERE 
+    LOWER(p.nome) LIKE :t1 
+    OR LOWER(p.descricao) LIKE :t2 
+    OR LOWER(c.nome) LIKE :t3
+    ORDER BY p.nome ASC';
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':t1', "%$busca%", PDO::PARAM_STR);
+    $stmt->bindValue(':t2', "%$busca%", PDO::PARAM_STR);
+    $stmt->bindValue(":t3", "%$busca%", PDO::PARAM_STR);
+    $stmt->execute();
+    response('ok', $stmt->fetchAll(PDO::FETCH_ASSOC));
+
+}
 
 
 //Listar lançamentos
@@ -47,11 +68,14 @@ if(!isset($_GET['id']) && $_GET['tipo'] === 'mais_vendidos') {
 
 //Listar produtos
 if(!isset($_GET['id'])) {
-    $stmt = $pdo->prepare('SELECT id, nome, preco, imagem_url, vendas FROM produtos');
-    $stmt->execute();
-    $produto = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $sql = "SELECT p.*, c.nome AS categoria_nome
+        FROM produtos p
+        LEFT JOIN categorias c ON p.categoria_id = c.id
+        ORDER BY p.nome ASC";
 
-    response('ok', $produto);
+
+$stmt = $pdo->query($sql);
+$produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 }
 
@@ -62,7 +86,6 @@ if($method === 'POST') {
     if(!$json || !isset($json['nome']) || !isset($json['preco'])) {
         response('erro', 'Dados incompletos.', 400);
     }
-
 
 $stmt = $pdo->prepare('INSERT INTO produtos (nome, preco, categoria_id, estoque, imagem_url) VALUES (?, ?, ?, ?, ?)');
 $stmt->execute([

@@ -7,6 +7,6 @@
 <body>
   <h1>Acesso Negado</h1>
   <p>Você não possui permissão para acessar esta página.</p>
-  <p><a href="index.php">Voltar ao login</a></p>
+  <p><a href="<?= BASE_URL ?>/public/index.php">Voltar ao login</a></p>
 </body>
 </html>

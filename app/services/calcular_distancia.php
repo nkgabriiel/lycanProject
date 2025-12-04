@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../core/config.php';
 require_once __DIR__ . '/geo.php';
 
 function distancia_km ($lat1, $lon1, $lat2, $lon2) {
