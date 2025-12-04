@@ -3,32 +3,37 @@
 if (session_status() === PHP_SESSION_NONE) {
     ini_set('session.cookie.httponly', 1);
     ini_set('session.use.strict.mode', 1);
-    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+
+    if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
         ini_set('session.cookie.secure', 1);
     }
+
     session_start();
 }
-define('DB_HOST', 'localhost');
-define('DB_NAME','sistema_auth');
-define('DB_USER',   'root');
-define('DB_PASS', '');
 
-define('BASE_URL', 'http://localhost/lycanproject');
+$DB_HOST = getenv('DB_HOST') ?: 'localhost';
+$DB_NAME = getenv('DB_NAME') ?: 'sistema_auth';
+$DB_USER = getenv('DB_USER') ?: 'root';
+$DB_PASS = getenv('DB_PASS') ?: '';
+$DB_PORT = getenv('DB_PORT') ?: '3306';
+
+define('BASE_URL', getenv('BASE_URL') ?: 'http://localhost/lycanproject');
 
 function conectar_banco() {
-    $dsn = "mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=utf8mb4";
+    global $DB_HOST, $DB_NAME, $DB_USER, $DB_PASS, $DB_PORT;
+
+    $dsn = "mysql:host={$DB_HOST};port={$DB_PORT};dbname={$DB_NAME};charset=utf8mb4";
+
     try {
-        return new PDO ($dsn, DB_USER, DB_PASS, [
+        return new PDO($dsn, $DB_USER, $DB_PASS, [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES => false
         ]);
     } catch (PDOException $e) {
         die("Erro de conexão: " . $e->getMessage());
+    }
 }
-}
-
-
 
 function redirecionar($caminho_absoluto) {
     // Garante que o caminho comece com /
